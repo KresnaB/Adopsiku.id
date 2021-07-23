@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create({ baseURL: "https://adopsiku.herokuapp.com" });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
@@ -41,7 +41,8 @@ export const getPetOffers = (query) => API.get(`/petOffers/${query}`);
 export const viewPetDetail = (id) => API.get(`/petOffers/${id}`);
 export const deletePetOffer = (provid, id) =>
   API.delete(`/petOffers/${provid}/${id}`);
-export const getProviderPets = (id) => API.get(`/petOffers/providerProfile/${id}`);
+export const getProviderPets = (id) =>
+  API.get(`/petOffers/providerProfile/${id}`);
 
 // Create Pet Offer
 export const createCatOffer = (newOffer) =>
@@ -84,7 +85,7 @@ export const getPetOffersByProviderID = (provID) =>
 export const updateStatusPetOffer = (id, status) =>
   API.put(`/petOffers/status/${id}`, status);
 export const setReportDuration = (id, duration) =>
-API.put(`/petOffers/reportduration/${id}`, duration);
+  API.put(`/petOffers/reportduration/${id}`, duration);
 export const getProviderDetail = (id) => API.get(`/users/provider/${id}`);
 
 // Adoption Request
@@ -116,9 +117,12 @@ export const getReportDetail = (id) => API.get(`/reports/detail/${id}`);
 export const acceptReport = (id, status) =>
   API.put(`/reports/updatestatus/${id}`, status);
 
-
 // Chat Conversations
-export const getUserConversations = (userId) => API.get(`/conversations/user/${userId}`)
-export const createConversation = (newConversation) => API.post('/conversations/', newConversation)
-export const getMessages = (conversationId) => API.get(`/conversations/${conversationId}`)
-export const sendMessage = (conversationId, newMessage) => API.post(`/conversations/${conversationId}`, newMessage)
+export const getUserConversations = (userId) =>
+  API.get(`/conversations/user/${userId}`);
+export const createConversation = (newConversation) =>
+  API.post("/conversations/", newConversation);
+export const getMessages = (conversationId) =>
+  API.get(`/conversations/${conversationId}`);
+export const sendMessage = (conversationId, newMessage) =>
+  API.post(`/conversations/${conversationId}`, newMessage);
