@@ -23,6 +23,10 @@ app.use("/adoptions", adoptionRouter);
 app.use("/reports", reportRouter);
 app.use("/conversations", conversationRouter);
 
+app.get("/", (req, res) => {
+  res.send("Welcome to adopsiku API");
+});
+
 const PORT = process.env.PORT || 5000;
 cancelAdoption.start();
 
