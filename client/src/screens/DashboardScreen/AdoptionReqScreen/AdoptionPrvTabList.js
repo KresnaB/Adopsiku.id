@@ -5,6 +5,7 @@ import {
   Tabs,
   Tab,
   Box,
+  Grid,
 } from "@material-ui/core";
 import PropTypes from 'prop-types';
 import useStyles from "./styles";
@@ -53,36 +54,19 @@ const AdoptionPrvTabList = () => {
   };
 
   return (
-    <>
+    <Grid className={classes.container}>
           <AppBar position="static" className={classes.bar}>
             <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" aria-label="simple tabs example">
-              <Tab label="Semua" {...a11yProps(0)} />
-              <Tab label="Menunggu" {...a11yProps(1)} />
-              <Tab label="Dalam Diskusi" {...a11yProps(2)} />
-              <Tab label="Diterima" {...a11yProps(3)} />
-              <Tab label="Ditolak" {...a11yProps(4)} />
-              <Tab label="Dibatalkan" {...a11yProps(5)} />
+              <Tab label="Semua" className={classes.label} {...a11yProps(0)} />
+              <Tab label="Menunggu" className={classes.label} {...a11yProps(1)} />
+              <Tab label="Dalam Diskusi" className={classes.label} {...a11yProps(2)} />
+              <Tab label="Diterima" className={classes.label} {...a11yProps(3)} />
+              <Tab label="Ditolak" className={classes.label} {...a11yProps(4)} />
+              <Tab label="Dibatalkan" className={classes.label} {...a11yProps(5)} />
             </Tabs>
           </AppBar>
-          <TabPanel value={value} index={0}>
-            <AdoptionPrvTable/>
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <AdoptionPrvTable status={0}/>
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            <AdoptionPrvTable status={1}/>
-          </TabPanel>
-          <TabPanel value={value} index={3}>
-            <AdoptionPrvTable status={3}/>
-          </TabPanel>
-          <TabPanel value={value} index={4}>
-            <AdoptionPrvTable status={2}/>
-          </TabPanel>
-          <TabPanel value={value} index={5}>
-            <AdoptionPrvTable status={4}/>
-          </TabPanel>
-    </>
+          <AdoptionPrvTable status={value === 0 ? "" : value}/>
+    </Grid>
   );
 };
 

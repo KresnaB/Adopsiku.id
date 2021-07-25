@@ -23,8 +23,7 @@ export const identityChecking = (profile) => {
 export const applying = (adopter, id) => {
   console.log(adopter)
   let applied = false;
-  const adopterChecking = adopter.filter((applied) => applied.adopter._id === id)
-  console.log(adopterChecking)
-  if(adopterChecking){applied = true}
+  const adopterChecking = adopter.find((applied) => applied.adopter._id === id && applied.status === 0)
+  if(adopterChecking){applied = true }
   return applied;
 }

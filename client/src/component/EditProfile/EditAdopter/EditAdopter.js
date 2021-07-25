@@ -176,7 +176,7 @@ const EditProfileData = () => {
         onSubmit={handleSubmit}
       >
         <Grid container spacing={2} className={classes.gridContainer}>
-          <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Grid item xs={12} sm={12} md={9} lg={9}>
             <TextField
               size="small"
               name="name"
@@ -192,6 +192,30 @@ const EditProfileData = () => {
                 {errors.name}
               </Typography>
             )}
+          </Grid>
+          <Grid item xs={12} sm={12} md={3} lg={3}>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Pekerjaan Tetap</FormLabel>
+              <RadioGroup
+                row
+                aria-label="fixedJob"
+                name="fixedJob"
+                value={profileData.fixedJob? "true":"false"}
+                onChange={handleChange}
+                required
+              >
+                <FormControlLabel
+                  value="true"
+                  control={<Radio />}
+                  label="Ya"
+                />
+                <FormControlLabel
+                  value="false"
+                  control={<Radio />}
+                  label="Tidak"
+                />
+              </RadioGroup>
+            </FormControl>
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <TextField

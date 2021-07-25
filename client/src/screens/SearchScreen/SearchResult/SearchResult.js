@@ -39,6 +39,8 @@ const SearchResult = ({ category }) => {
     color: [],
     fur: [],
     chirp: [],
+    crow:[],
+    diameter:[],
     gender: [],
     size: [],
     source: [],
@@ -293,34 +295,37 @@ const SearchResult = ({ category }) => {
                   </List>
                 }
               />
-              <Filter
-                title="Kesehatan"
-                applyFilter={applyFilter}
-                body={
-                  <List className={classes.root} dense>
-                    <BodyFilter
-                      item={"Sterilisasi"}
-                      handleChange={(e) => {
-                        setChecked({
-                          ...checked,
-                          spayedNeutered: e.target.checked,
-                        });
-                      }}
-                      checked={checked.spayedNeutered}
-                    />
-                    <BodyFilter
-                      item={"Vaksinasi"}
-                      handleChange={(e) => {
-                        setChecked({
-                          ...checked,
-                          vaccinated: e.target.checked,
-                        });
-                      }}
-                      checked={checked.vaccinated}
-                    />
-                  </List>
-                }
-              />
+              {["Cat", "Dog", "Rabbit"].find((pet) => pet === category) ? 
+                <>
+                  <Filter
+                    title="Kesehatan"
+                    applyFilter={applyFilter}
+                    body={
+                      <List className={classes.root} dense>
+                        <BodyFilter
+                          item={"Sterilisasi"}
+                          handleChange={(e) => {
+                            setChecked({
+                              ...checked,
+                              spayedNeutered: e.target.checked,
+                            });
+                          }}
+                          checked={checked.spayedNeutered}
+                        />
+                        <BodyFilter
+                          item={"Vaksinasi"}
+                          handleChange={(e) => {
+                            setChecked({
+                              ...checked,
+                              vaccinated: e.target.checked,
+                            });
+                          }}
+                          checked={checked.vaccinated}
+                        />
+                      </List>
+                    }
+                  />
+                </>:null}
               <Filter
                 title="Warna"
                 applyFilter={applyFilter}
@@ -340,21 +345,24 @@ const SearchResult = ({ category }) => {
                   </List>
                 }
               />
-              <Filter
-                title="Panjang bulu"
-                applyFilter={applyFilter}
-                body={
-                  <List className={classes.root} dense>
-                    {["Pendek", "Sedang", "Panjang"].map((fur) => (
-                      <BodyFilter
-                        item={fur}
-                        handleChange={handleChecked("fur", fur, checked.fur)}
-                        checked={checked.fur.indexOf(fur) !== -1}
-                      />
-                    ))}
-                  </List>
-                }
-              />
+              {["Cat", "Dog"].find((pet) => pet === category) ? 
+                <>
+                  <Filter
+                    title="Panjang bulu"
+                    applyFilter={applyFilter}
+                    body={
+                      <List className={classes.root} dense>
+                        {["Pendek", "Sedang", "Panjang"].map((fur) => (
+                          <BodyFilter
+                            item={fur}
+                            handleChange={handleChecked("fur", fur, checked.fur)}
+                            checked={checked.fur.indexOf(fur) !== -1}
+                          />
+                        ))}
+                      </List>
+                    }
+                  />
+              </>:null}
               {category === "Bird" ? (
                 <Filter
                   title="Kicauan"
@@ -370,6 +378,27 @@ const SearchResult = ({ category }) => {
                             checked.chirp
                           )}
                           checked={checked.chirp.indexOf(chirp) !== -1}
+                        />
+                      ))}
+                    </List>
+                  }
+                />
+              ) : null}
+              {category === "Chicken" ? (
+                <Filter
+                  title="Kokokan"
+                  applyFilter={applyFilter}
+                  body={
+                    <List className={classes.root} dense>
+                      {["Lemah", "Sedang", "Keras"].map((crow) => (
+                        <BodyFilter
+                          item={crow}
+                          handleChange={handleChecked(
+                            "crow",
+                            crow,
+                            checked.crow
+                          )}
+                          checked={checked.crow.indexOf(crow) !== -1}
                         />
                       ))}
                     </List>
@@ -410,55 +439,64 @@ const SearchResult = ({ category }) => {
                   </List>
                 }
               />
-              <Filter
-                title="Ukuran"
-                applyFilter={applyFilter}
-                body={
-                  <List className={classes.root} dense>
-                    {["Kecil", "Sedang", "Besar"].map((size) => (
-                      <BodyFilter
-                        item={size}
-                        handleChange={handleChecked("size", size, checked.size)}
-                        checked={checked.size.indexOf(size) !== -1}
-                      />
-                    ))}
-                  </List>
-                }
-              />
-              <Filter
-                title="Terlatih"
-                applyFilter={applyFilter}
-                body={
-                  <List className={classes.root} dense>
-                    <BodyFilter
-                      item={"Terlatih"}
-                      handleChange={(e) => {
-                        setChecked({ ...checked, trained: e.target.checked });
-                      }}
-                      checked={checked.trained}
-                    />
-                  </List>
-                }
-              />
-              <Filter
-                title="Sumber"
-                applyFilter={applyFilter}
-                body={
-                  <List className={classes.root} dense>
-                    {["Rescue", "Peliharaan"].map((source) => (
-                      <BodyFilter
-                        item={source}
-                        handleChange={handleChecked(
-                          "source",
-                          source,
-                          checked.source
-                        )}
-                        checked={checked.source.indexOf(source) !== -1}
-                      />
-                    ))}
-                  </List>
-                }
-              />
+              {["Cat", "Dog", "Rabbit", "Bird", "Chicken", "Fish", "Turtle"].find((pet) => pet === category) ? 
+                <>
+                  <Filter
+                    title="Ukuran"
+                    applyFilter={applyFilter}
+                    body={
+                      <List className={classes.root} dense>
+                        {["Kecil", "Sedang", "Besar"].map((size) => (
+                          <BodyFilter
+                            item={size}
+                            handleChange={handleChecked("size", size, checked.size)}
+                            checked={checked.size.indexOf(size) !== -1}
+                          />
+                        ))}
+                      </List>
+                    }
+                  />
+              </>:null}
+              {["Cat", "Dog", "Bird", "Fury"].find((pet) => pet === category) ? 
+                <>
+                  <Filter
+                    title="Terlatih"
+                    applyFilter={applyFilter}
+                    body={
+                      <List className={classes.root} dense>
+                        <BodyFilter
+                          item={"Terlatih"}
+                          handleChange={(e) => {
+                            setChecked({ ...checked, trained: e.target.checked });
+                          }}
+                          checked={checked.trained}
+                        />
+                      </List>
+                    }
+                  />
+                </>:null}
+              {["Cat", "Dog", "Rabbit", "Bird", "Chicken"].find((pet) => pet === category) ? 
+                <>
+                  <Filter
+                  title="Sumber"
+                  applyFilter={applyFilter}
+                  body={
+                    <List className={classes.root} dense>
+                      {["Rescue", "Peliharaan"].map((source) => (
+                        <BodyFilter
+                          item={source}
+                          handleChange={handleChecked(
+                            "source",
+                            source,
+                            checked.source
+                          )}
+                          checked={checked.source.indexOf(source) !== -1}
+                        />
+                      ))}
+                    </List>
+                  }
+                />
+              </>:null }
               <Filter
                 title="Lokasi"
                 applyFilter={applyFilter}

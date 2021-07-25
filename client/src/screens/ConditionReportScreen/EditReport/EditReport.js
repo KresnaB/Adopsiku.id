@@ -62,7 +62,7 @@ const EditReport = ({ report }) => {
     <Grid container className={classes.center}>
       <Grid item xs={12} md={8}>
         <Paper className={classes.container} elevation={3}>
-          <Typography variant="h5">Edit Laporan</Typography>
+          <Typography variant="h6" fontWeight="bold" textAlign="center">Edit laporan kondisi hewan</Typography>
           {report === undefined ? (
             <Alert severity="error">Data Hewan Adopsi Tidak Ada</Alert>
           ) : (
@@ -179,14 +179,16 @@ const EditReport = ({ report }) => {
                   )}
                 </Grid>
               </Grid>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Kirim
-              </Button>
+              <div className={classes.submitBtn}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  className={classes.btn}
+                >
+                  Kirim
+                </Button>
+              </div>
             </form>
           )}
         </Paper>

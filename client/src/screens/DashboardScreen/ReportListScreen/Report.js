@@ -11,7 +11,6 @@ import {
   CardContent,
   Chip,
   IconButton,
-  Modal,
   Button,
   CardActions,
 } from "@material-ui/core";
@@ -25,6 +24,7 @@ import {
 } from "@material-ui/lab";
 import { FindInPage, DeleteForever, Edit } from "@material-ui/icons";
 import { deleteReport } from "../../../store/actions/conditionReportActions";
+import ConfirmationDialog from "../../../component/Modal/ConfirmationDialog";
 
 const Report = ({ report }) => {
   const classes = useStyles();
@@ -165,14 +165,21 @@ const Report = ({ report }) => {
                     }
                   />
                 </IconButton>
-                <Modal
+                <ConfirmationDialog
+                  handleOpen={open}
+                  handleClose={handleDeleteModalClose}
+                  handleAction={handleDelete}
+                  title="Hapus laporan kondisi hewan"
+                  body="Apa kamu yakin untuk menghapus laporan kondisi hewan ini?"
+                />
+                {/* <Modal
                   open={open}
                   onClose={handleDeleteModalClose}
                   aria-labelledby="simple-modal-title"
                   aria-describedby="simple-modal-description"
                 >
                   {body}
-                </Modal>
+                </Modal> */}
               </div>
             ) : (
               <></>

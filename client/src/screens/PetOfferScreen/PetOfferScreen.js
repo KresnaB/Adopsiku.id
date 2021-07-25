@@ -59,15 +59,12 @@ const PetOfferScreen = ({ id }) => {
                     {petOffer.name}
                   </Typography>
                   <div className={classes.subTitle1}>
-                    {petOffer.breeds.map((breed, index) => (
                       <Typography
-                        key={index}
                         variant="h6"
                         className={classes.subTitle2}
                       >
-                        {breed + " "}
+                        {petOffer.breeds.join(", ")}
                       </Typography>
-                    ))}
                     <Typography className={classes.address} variant="h6">
                       {petOffer.provider.address.city +
                         ", " +
@@ -172,11 +169,11 @@ const PetOfferScreen = ({ id }) => {
                   <div className={classes.buttonGroup}>
                     { petOffer.status === 1 ?
                         <>
-                          <Typography>Dalam diskusi {adopter[0]? " dengan " + adopter[0].adopter.name :""} </Typography>
+                          <Alert severity="info" className={classes.alertSuccess}>Dalam diskusi {adopter[0]? " dengan " + adopter[0].adopter.name :""} </Alert>
                         </>
                       : petOffer.status === 2 ?
                       <>
-                        <Typography>Berhasil diadopsi {adopter[0]? " oleh " + adopter[0].adopter.name :""}</Typography>
+                        <Alert severity="success" className={classes.alertSuccess}>Berhasil diadopsi {adopter[0]? " oleh " + adopter[0].adopter.name :""}</Alert>
                       </>
                       : user?.role !== "IndividualProvider" && user?.role !== "OrganizationalProvider"? (
                         <>
@@ -200,7 +197,6 @@ const PetOfferScreen = ({ id }) => {
                         </>
                        ):null
                     }
-                    
                     <Typography variant="h6" className={classes.subTitle3}>
                       Ditawarkan oleh
                     </Typography>

@@ -74,7 +74,8 @@ export default makeStyles((theme) => ({
     },
   },
   auth: {
-    marginRight: theme.spacing(2),
+    // marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(2),
     borderRadius: "5em",
     boxShadow: 'none',
     fontWeight: 'bold',
@@ -84,16 +85,16 @@ export default makeStyles((theme) => ({
       fontSize: 12,
     },
   },
-  register: {
-    borderRadius: "5em",
-    boxShadow: 'none',
-    fontWeight: 'bold',
-    [theme.breakpoints.down('xs')]: {
-      maxWidth: '30px',
-      maxHeight: '30px',
-      fontSize: 12,
-    },
-  },
+  // register: {
+  //   borderRadius: "5em",
+  //   boxShadow: 'none',
+  //   fontWeight: 'bold',
+  //   [theme.breakpoints.down('xs')]: {
+  //     maxWidth: '30px',
+  //     maxHeight: '30px',
+  //     fontSize: 12,
+  //   },
+  // },
   userName: {
     display: 'flex',
     alignItems: 'center',

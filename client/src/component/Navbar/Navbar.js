@@ -218,7 +218,7 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Button
-              className={classes.register}
+              className={classes.auth}
               component={Link}
               to="/search"
               variant="contained"
@@ -268,7 +268,7 @@ export default function PrimarySearchAppBar() {
                   Masuk
                 </Button>
                 <Button
-                  className={classes.register}
+                  className={classes.auth}
                   component={Link}
                   to="/usertype/register"
                   variant="contained"

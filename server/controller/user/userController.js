@@ -11,6 +11,7 @@ import IndProviders from "../../model/user/indProviderModel.js";
 import OrgProviders from "../../model/user/orgProviderModel.js";
 import Token from "../../model/user/tokenModel.js";
 import validateRegisterInput from "./validation/registerValidation.js";
+import Address from "../../model/user/addressModel.js";
 
 // @route   POST /signin/
 // @desc    Sign in action
@@ -52,7 +53,7 @@ export const signin = async (req, res) => {
       isVerified: existingUser.isVerified,
       token,
     });
-    console.log("here");
+
   } catch (error) {
     res.status(500).json({ message: "Something went wrong." });
   }
@@ -62,7 +63,7 @@ export const signin = async (req, res) => {
 // @desc    Sign in action
 // @access  Public
 export const googleSignIn = async (req, res) => {
-  console.log(req.body);
+
   const { email, imageUrl, name } = req.body;
   try {
     const existingUser = await Users.findOne({ email });
@@ -139,6 +140,7 @@ export const createUser = async (req, res) => {
     switch (req.params.type) {
       case "adopter":
         const adopterHashedPassword = await bcrypt.hash(password, 12);
+        
         userData = await new Adopters({
           createdAt: new Date().toISOString(),
           name,
@@ -148,6 +150,7 @@ export const createUser = async (req, res) => {
           imageUrl: "",
           phoneNumber: "",
           birthDate: null,
+          fixedJob: false,
           address: {
             province: "",
             city: "",

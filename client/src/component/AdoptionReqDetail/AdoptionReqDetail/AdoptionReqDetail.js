@@ -44,6 +44,7 @@ const AdoptionReqDetail = ({
         />
         <ReqDetail label="Nomor KTP" value={adopter.identityNumber} />
         <ReqDetail label="Jenis Kelamin" value={adopter.gender === "Female" ? "Perempuan": adopter.gender === "Male"? "Laki-laki":"Lainnya"} />
+        <ReqDetail label="Pekerjaan Tetap" value={adopter.fixedJob ? "Ya" : "Tidak"} />
         <ReqDetail
           label="Alamat"
           value={

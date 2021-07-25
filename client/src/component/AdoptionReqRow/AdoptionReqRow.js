@@ -78,12 +78,12 @@ const AdoptionReqRow = ({
         <TableCell align="center">
           <Chip
             size="small"
-            label={ status === 0 ? "Menunggu" : status === 1 ? "Dalam Diskusi" : status === 2 ? "Ditolak" : status === 3 ? "Diterima" : "Dibatalkan" }
+            label={ status === 0 ? "Menunggu" : status === 1 ? "Dalam Diskusi" : status === 2 ? "Diterima"  : status === 3 ? "Ditolak" : "Dibatalkan" }
             style={
               status === 0 ? { backgroundColor: "#fade2a" }
               : status === 1 ? { backgroundColor: "#49b4d1" }
-              : status === 2 ? { backgroundColor: "#e57373" }
-              : status === 3 ? { backgroundColor: "#66bb6a" }
+              : status === 2 ? { backgroundColor: "#66bb6a"}
+              : status === 3 ? { backgroundColor: "#e57373" }
               : { backgroundColor: "#f58142" }
             }
             className={classes.statusLabel}
@@ -103,7 +103,7 @@ const AdoptionReqRow = ({
                   style={{ color: "#e57373" }}
                   className={classes.statusIcon}
             />
-          ) : status === 3 ? (
+          ) :  status === 3 ? (
             <CheckCircle
               style={{ color: "#66bb6a" }}
               className={classes.statusIcon}

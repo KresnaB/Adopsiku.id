@@ -5,6 +5,14 @@ export default makeStyles((theme) => ({
         margin: theme.spacing(1)
     },
     bar:{
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        borderBottom:'solid black 1px'
+    },
+    label:{
+        fontWeight:'bold',
+        textTransform:'none'
+    },
+    container:{
+        margin:theme.spacing(2)
     }
 }));

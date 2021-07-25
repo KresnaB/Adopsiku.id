@@ -48,6 +48,7 @@ console.log(profile.id)
                 <Data label="Tanggal Lahir" value={profile.birthDate? moment(profile.birthDate).format('DD MMM YYYY') : '-'}/>
                 <Data label="Nomor KTP" value={profile.identityNumber}/>
                 <Data label="Jenis Kelamin" value={profile.gender}/>
+                <Data label="Pekerjaan Tetap" value={profile.fixedJob} job/>
                 <Data label="Alamat" value={
                     (address.additional? (address.additional + " "):'') +
                     (address.village? (address.village + " " ): '') +

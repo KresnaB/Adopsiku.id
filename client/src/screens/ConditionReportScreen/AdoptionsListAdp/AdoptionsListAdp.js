@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useStyles from "./styles";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { reportListByAdoption } from "../../../store/actions/conditionReportActions";
 import { Grid, Typography, CircularProgress, Alert } from "@material-ui/core";
@@ -36,7 +35,7 @@ const AdoptionsListAdp = () => {
         <Grid container>
           <Grid item xs={12}>
             <Typography variant="h6" className={classes.title}>
-              Daftar Hewan Yang Sudah Diadopsi
+              Daftar hewan yang berhasil diadopsi
             </Typography>
           </Grid>
           {conditionReport.reports.map((report) => (

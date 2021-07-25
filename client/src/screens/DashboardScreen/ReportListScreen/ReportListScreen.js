@@ -36,7 +36,7 @@ console.log(conditionReport)
         <>
           <Grid item xs={10} md={6}>
             <Typography variant="h6" className={classes.pageTitle}>
-              Daftar Laporan
+              Daftar laporan kondisi hewan
             </Typography>
           </Grid>
           <Grid item xs={2} md={6}>
@@ -66,7 +66,7 @@ console.log(conditionReport)
       ) : (
         <Grid item md={12} xs={12}>
           <Typography variant="h6" className={classes.pageTitle}>
-            Daftar Laporan
+            Daftar laporan kondisi hewan
           </Typography>
         </Grid>
       )}

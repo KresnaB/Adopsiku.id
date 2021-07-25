@@ -23,7 +23,7 @@ const AdoptionsList = () => {
     ) {
       dispatch(reportListByPet(user.id));
     }
-  }, [dispatch, user.id, conditionReport]);
+  }, [dispatch, user.id]);
   console.log(conditionReport);
   return (
     <>
@@ -36,8 +36,8 @@ const AdoptionsList = () => {
       ) : (
         <Grid container>
           <Grid item xs={12}>
-            <Typography variant="h6">
-              Daftar Hewan Yang Sudah Diadopsi
+            <Typography variant="h6" marginLeft={1} fontWeight="bold">
+              Daftar hewan yang sudah diadopsi
             </Typography>
           </Grid>
           {conditionReport.reports.map((report) => (

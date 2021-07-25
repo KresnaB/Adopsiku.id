@@ -2,7 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     pageTitle: {
-        margin: theme.spacing(1), 
+        marginLeft: theme.spacing(2), 
+        marginTop: theme.spacing(1), 
         fontWeight: 'bold',
         [theme.breakpoints.down('sm')]: {
             fontSize: 18,
@@ -27,9 +28,6 @@ export default makeStyles((theme) => ({
             display: 'block',
             color: theme.palette.primary.main,
         },
-    },
-    tablePaper: {
-        margin: theme.spacing(1)
     },
     tableContainer: {
         maxHeight: 500,

@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     pageTitle: {
-        margin: theme.spacing(1), 
+        marginLeft: theme.spacing(2), 
         fontWeight: 'bold',
         [theme.breakpoints.down('sm')]: {
             fontSize: 18,
@@ -11,6 +11,9 @@ export default makeStyles((theme) => ({
     addContainer: {        
         display: 'flex', 
         justifyContent: 'flex-end' ,        
+    },    
+    container:{
+        margin:theme.spacing(2)
     },
     addButton: {
         margin: theme.spacing(1), 
@@ -28,9 +31,6 @@ export default makeStyles((theme) => ({
             color: theme.palette.primary.main,
         },
     },
-    tablePaper: {
-        margin: theme.spacing(1)
-    },
     tableContainer: {
         maxHeight: 500,
     },
@@ -40,6 +40,14 @@ export default makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             fontSize: '13px'
         },
+    },    
+    bar:{
+        backgroundColor: 'white',
+        borderBottom:'solid black 1px'
+    },
+    label:{
+        fontWeight:'bold',
+        textTransform:'none'
     },
     tableHeadHide: {
         fontWeight: 'bold',

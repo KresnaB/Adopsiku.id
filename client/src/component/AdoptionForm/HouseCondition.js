@@ -62,7 +62,7 @@ const HouseCondition = ({
                     <Autocomplete className={classes.field} size="small" multiple id="outdoors" value={outdoors.map((outdoor) => outdoor)} options={["Kebun depan", "Kebun belakang", "Taman dalam", "Teras", "Balkon", "Lainnya"]} disableCloseOnSelect getOptionLabel={ (option) => option } 
                         onChange={(e, v) => outdoorChange (v)}
                         renderInput={(params) => (
-                            <TextField {...params} size="small" variant="outlined" label="Outdoor" placeholder="Outdoor" required/>
+                            <TextField {...params} size="small" variant="outlined" label="Tempat bermain hewan" placeholder="Tempat bermain hewan" required/>
                         )}
                     required/>
                     {error.outdoors && <p className={classes.errorMessage}>{error.outdoors}</p>}

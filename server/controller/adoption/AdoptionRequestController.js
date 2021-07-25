@@ -5,18 +5,6 @@ import AdoptionRequest from "../../model/adoption/AdoptionRequestModel.js";
 // @access  Adopter
 export const applyAdoption = async (req, res) => {
   try {
-    // const offerCheck = await AdoptionRequest.find({
-    //   offer: req.params.offer,
-    //   adopter: req.params.adopter,
-    // });
-
-    // if (offerCheck)
-    //   return res
-    //     .status(400)
-    //     .send({
-    //       message: "Anda sudah pernah mengajukan adopsi pada hewan ini",
-    //     });
-    // console.log(req.body)
     const newAdoptionRequest = await AdoptionRequest.create({
       pet: req.body.pet,
       adopter: req.body.adopter,
@@ -95,7 +83,6 @@ export const updateAdoption = async (req, res) => {
 // @access  Adopter
 export const cancelAdoption = async (req, res) => {
   try {
-    console.log(req.params.id);
     await AdoptionRequest.findByIdAndDelete(req.params.id);
   } catch (err) {
     res.status(400).send({ error: err });

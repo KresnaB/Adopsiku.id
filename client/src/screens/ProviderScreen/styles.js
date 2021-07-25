@@ -2,15 +2,28 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     providerAvatar: {
-        // margin: 'auto',
         width: '8rem',
         height: '8rem',
-        marginLeft: theme.spacing(2)
+        margin:'auto'
+    },
+    container:{
+        margin: theme.spacing(1)
     },
     grid1: {
-        textAlign: 'center',
-        margin: 'auto',
-        paddingTop: '5rem',
+        [theme.breakpoints.up('md')]:{
+            paddingTop: '4rem',
+        },
+        paddingTop: '1rem'
+    },
+    value:{
+        marginBottom: theme.spacing(1)
+    },
+    title:{
+        fontWeight:'bold',
+        marginBottom: theme.spacing(1),
+        [theme.breakpoints.down('md')]:{
+            fontSize: '16px',
+        },
     },
     grid2: {
         paddingLeft: '1rem',
@@ -28,13 +41,16 @@ export default makeStyles((theme) => ({
     grid3: {
         textAlign: 'center',
         margin: 'auto',
-        padding: theme.spacing(1)
+        paddingTop: '4rem',
     },
     card: {
         borderRadius: '1rem',
         backgroundColor: '#FFB822',
         height: '100%',
         width: '100%',
+    },
+    profileContainer:{
+        margin:theme.spacing(1)
     },
     media: {
         height: '3rem',

@@ -170,7 +170,6 @@ export const createPet = async (req, res) => {
         res.send(`No pet with ${req.params.type} type!`);
         break;
     }
-    console.log(petOffer);
 
     res.send({ petOffer });
   } catch (err) {
@@ -204,6 +203,12 @@ export const getPets = async (req, res) => {
         match: provMatch,
       })
       .exec()
+      const explain = await Pet.find(match).explain().
+      then(res => res[0]);
+    // Object describing how MongoDB planned to execute the query
+    console.log(explain.queryPlanner);
+    // Object containing stats about how MongoDB executed the query
+    console.log(explain.executionStats);
 
     const petOffers = pets.filter((pet) => pet.provider !== null);
     const totalOffer = petOffers.length;
@@ -298,7 +303,6 @@ export const getPetById = async (req, res) => {
       "adopter status"
     ).populate("adopter", "_id name");
     res.send({ petOffer, adopter });
-    console.log(adopter);
   } catch (err) {
     res.status(404).send({ message: "Pet not found!" });
   }
@@ -336,7 +340,6 @@ export const getPetsByProviderID = async (req, res) => {
   try {
     const petOffers = await Pet.find({ provider: req.params.id });
     res.send({ petOffers });
-    console.log(petOffers)
   } catch (err) {
     res.status(400).send({ error: err });
   }
@@ -371,9 +374,8 @@ export const updatePetStatus = async (req, res) => {
 
 export const getProviderPets = async (req, res) => {
   try {
-    const provider = await User.findById( { _id: req.params.id }, 'name imageUrl address');
+    const provider = await User.findById({ _id: req.params.id });
     const petOffers = await Pet.find({ provider: req.params.id })
-console.log({petOffers, provider})
     res.send({ provider, petOffers });
   } catch (err) {
     res.status(400).send({ error: err });

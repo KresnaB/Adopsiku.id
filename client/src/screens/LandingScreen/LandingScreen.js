@@ -16,7 +16,7 @@ const Landing = () =>{
                 <Typography variant="h4" className={classes.quote}>
                 Situs adopsi hewan yang membantu hewan peliharaanmu menemukan rumah barunya.
                 </Typography>
-                <Button className={classes.button} component={Link} to="/" variant="contained" color="primary">Cari Sekarang</Button>
+                <Button className={classes.button} component={Link} to="/search" variant="contained" color="primary">Cari Sekarang</Button>
             </Grid>
             
         </Grid>

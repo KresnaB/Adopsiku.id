@@ -92,7 +92,7 @@ export const getReportByAdoption = async (req, res) => {
   try {
     const reports = await AdoptionRequest.find({
       adopter: req.params.id,
-      status: 3,
+      status: 2,
     })
       .select("status")
       .populate({

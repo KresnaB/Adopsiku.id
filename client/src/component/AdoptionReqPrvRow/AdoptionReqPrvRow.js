@@ -94,7 +94,7 @@ const AdoptionReqPrvRow = ({
   const handleAcceptStatus = () => {
     setChangeStatus({
       id: _id,
-      status: 3,
+      status: 2,
       offerId: pet._id,
       offerStatus: 2,
     });
@@ -104,7 +104,7 @@ const AdoptionReqPrvRow = ({
   const handleRejectStatus = () => {
     setChangeStatus({
       id: _id,
-      status: 2,
+      status: 3,
       offerId: pet._id,
       offerStatus: 0,
     });
@@ -150,14 +150,14 @@ const AdoptionReqPrvRow = ({
         <TableCell align="center">
           <Chip
             size="small"
-            label={ status === 0 ? "Menunggu" : status === 1 ? "Dalam Diskusi" : status === 2 ? "Ditolak" : status === 3 ? "Diterima" : "Dibatalkan" }
+            label={ status === 0 ? "Menunggu" : status === 1 ? "Dalam Diskusi" : status === 2 ? "Diterima" : status === 3 ? "Ditolak" : "Dibatalkan" }
             disabled={compLoading ? true : false}
             onClick={status === 0 || status === 1 ? handleOpenStatusModal:null}
             style={
               status === 0 ? { backgroundColor: "#fade2a" }
               : status === 1 ? { backgroundColor: "#49b4d1" }
-              : status === 2 ? { backgroundColor: "#e57373" }
-              : status === 3 ? { backgroundColor: "#66bb6a" }
+              : status === 2 ? { backgroundColor: "#66bb6a" }
+              : status === 3 ? { backgroundColor: "#e57373" }
               : { backgroundColor: "#f58142" }
             }
             className={classes.statusLabel}
@@ -183,13 +183,13 @@ const AdoptionReqPrvRow = ({
             )}
             </IconButton>
             : status === 2 ?
-              <Cancel
-                  style={{ color: "#e57373" }}
+              <CheckCircle
+                  style={{ color: "#66bb6a" }}
                   className={classes.statusIcon}
               />
             : status === 3 ?
-              <CheckCircle
-                  style={{ color: "#66bb6a" }}
+              <Cancel
+                  style={{ color: "#e57373" }}
                   className={classes.statusIcon}
               />
             :
@@ -225,7 +225,7 @@ const AdoptionReqPrvRow = ({
               />
             </IconButton>
           </Tooltip>
-          {status === 3 ? 
+          {status === 2 ? 
             (<Tooltip
               id="tooltip-top-start"
               title="Durasi pelaporan"

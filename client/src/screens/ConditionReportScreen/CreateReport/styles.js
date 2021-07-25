@@ -92,4 +92,15 @@ export default makeStyles((theme) => ({
     color: "#BB371A",
     marginLeft: theme.spacing(1),
   },
+  btn: {
+    borderRadius: "5em",
+    boxShadow: "none",
+    fontWeight: "bold",
+    marginBottom: theme.spacing(2),
+  },
+  submitBtn: {
+    display: "flex",
+    margin: theme.spacing(1),
+    justifyContent: "center",
+  },
 }));

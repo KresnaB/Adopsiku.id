@@ -15,10 +15,10 @@ const ProfileCompletionScreen = () => {
             description = 'Dapatkan akses untuk mengajukan adopsi dengan melengkapi profil!';
             break;
         case 'IndividualProvider' :
-            description = 'Dapatkan akses untuk menawarkan hewanmu dengan melengkapi profil!';
+            description = 'Dapatkan akses untuk menawarkan hewan dengan melengkapi profil!';
             break;
         case 'OrganizationalProvider' :
-            description = 'Dapatkan akses untuk untuk menawarkan hewan organisasimu dengan melengkapi profil!';
+            description = 'Dapatkan akses untuk untuk menawarkan hewan dengan melengkapi profil!';
             break;
     }
     let update;

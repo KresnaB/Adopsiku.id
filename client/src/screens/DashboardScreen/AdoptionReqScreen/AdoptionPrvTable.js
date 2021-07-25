@@ -51,7 +51,7 @@ const AdoptionPrvTable = ({status}) => {
   // Get Pet Offer List data
   useEffect(() => {
     dispatch(viewAdoptionsByProvider(userInfo.id));
-  }, [dispatch, userInfo]);
+  }, [dispatch, userInfo, status]);
 
   // Page settings on table
   const [page, setPage] = useState(0);
@@ -92,7 +92,7 @@ const AdoptionPrvTable = ({status}) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-              {status === undefined?
+              {status === ""?
                 adoptionReq
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((adoption) => (
@@ -105,7 +105,7 @@ const AdoptionPrvTable = ({status}) => {
                   )):
                   adoptionReq
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .filter((adoption) => adoption.status === status)
+                  .filter((adoption) => adoption.status === status-1)
                   .map((adoption) => (
                     <AdoptionReqPrvRow
                       key={adoption._id}

@@ -48,7 +48,7 @@ const AdoptionTable = ({status}) => {
   // Get Pet Offer List data
   useEffect(() => {
     dispatch(viewAdoptionsByAdopter(userInfo.id));
-  }, [dispatch, userInfo]);
+  }, [dispatch, userInfo, status]);
 
   // Page settings on table
   const [page, setPage] = useState(0);
@@ -69,7 +69,7 @@ const AdoptionTable = ({status}) => {
       ) : error ? (
         <Alert severity="error">{error}</Alert>
       ) : (
-        <Paper className={classes.tablePaper}>
+        <Paper>
           <TableContainer className={classes.tableContainer}>
             <Table stickyHeader>
               <TableHead>
@@ -89,7 +89,7 @@ const AdoptionTable = ({status}) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-              {status === undefined?
+              {status === "" ?
                 adoptionReq
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((adoption) => (
@@ -102,7 +102,7 @@ const AdoptionTable = ({status}) => {
                   )):
                   adoptionReq
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .filter((adoption) => adoption.status === status)
+                  .filter((adoption) => adoption.status === status-1)
                   .map((adoption) => (
                     <AdoptionReqRow
                       key={adoption._id}

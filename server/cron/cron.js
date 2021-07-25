@@ -2,7 +2,7 @@
     import AdoptionRequest from "../model/adoption/AdoptionRequestModel.js"
     import moment from "moment";
 
-    export const cancelAdoption = cron.schedule('*/15 * * * * *', () => {
+    export const cancelAdoption = cron.schedule('*/59 * * * * *', () => {
         findExpiredAdoption().then(console.log('checking'));
     });
 

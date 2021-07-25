@@ -83,7 +83,7 @@ export default makeStyles((theme) => ({
     },
     subTitle3: {
         fontWeight: 'bold',
-        marginTop: theme.spacing(2),
+        marginTop: theme.spacing(1),
         // textAlign: 'center'
     },
     body1: {
@@ -109,16 +109,18 @@ export default makeStyles((theme) => ({
     },
     button2:{
         boxShadow: 'none',
-        fontWeight: 'bold',
+        textTransform: 'none',
+        fontSize: '18px',
         minWidth: '200px',
         minHeight: '45px',
+        width: '70%',
         border: '0px',
         borderRadius: "5em",
         backgroundColor: theme.palette.secondary.main,
         marginTop: theme.spacing(2),
         '&:hover': {
-            backgroundColor: theme.palette.secondary.main,
             color: theme.palette.primary.main,
+            backgroundColor: 'black'
         },
         color: 'black'
     },
@@ -133,21 +135,34 @@ export default makeStyles((theme) => ({
         flexDirection: 'row',
     },
     provContainer: {
-        padding: '0.5rem',
+        padding: '0.25rem',
         backgroundColor: '#FFF3CE',
-        width: '100%',
+        width: '75%',
+        margin:theme.spacing(1),
+        '&:hover': {
+            backgroundColor: 'white'
+        },
     },
     provider: {
         textDecoration: 'none',
-        color: 'black'
+        color: 'black',
+        fontWeight: 'bold',  
+    },
+    alertSuccess:{
+        width: '70%',
+        marginLeft:theme.spacing(1),
+        marginRight:theme.spacing(1),
+        fontSize: '16px'
     },
     avatar: {
-        marginRight: '0.5rem',
+        margin: theme.spacing(1),
         width: '3rem',
         height: '3rem',
     },
     providerName: {
-        marginTop: '0.5rem',
+        margin: theme.spacing(2),
+        textDecoration:'none',
+        color:'black'
     },
     loading: {
         display: 'flex',

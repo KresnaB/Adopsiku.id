@@ -84,7 +84,7 @@ const ApplyAdoption = ({ id }) => {
 
   const petOfferDetails = useSelector((state) => state.petOfferDetails);
   const { petOffer, adopter } = petOfferDetails;
-
+  let applied;
   useEffect(() => {
     if(!profile) dispatch(viewProfile(userInfo.id));
   }, [dispatch, userInfo, profile])
@@ -101,7 +101,8 @@ const ApplyAdoption = ({ id }) => {
         history.push('/')
       }else{
         if(adopter){
-          if(applying(adopter, userInfo.id)){
+          applied = applying(adopter, userInfo.id, petOffer.status)
+          if(applied){
             history.push(`/petoffer/${id}`)
           }
         }

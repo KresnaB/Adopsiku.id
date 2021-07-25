@@ -8,6 +8,7 @@ import Address from './addressModel.js'
         address: { type: Address },
         birthDate: { type: Date },
         gender: { type: String },
+        fixedJob: { type: Boolean },
         identityNumber: { type: String },
       },
     ),
