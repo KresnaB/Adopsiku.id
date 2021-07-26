@@ -53,7 +53,6 @@ export const signin = async (req, res) => {
       isVerified: existingUser.isVerified,
       token,
     });
-
   } catch (error) {
     res.status(500).json({ message: "Something went wrong." });
   }
@@ -63,7 +62,6 @@ export const signin = async (req, res) => {
 // @desc    Sign in action
 // @access  Public
 export const googleSignIn = async (req, res) => {
-
   const { email, imageUrl, name } = req.body;
   try {
     const existingUser = await Users.findOne({ email });
@@ -140,7 +138,7 @@ export const createUser = async (req, res) => {
     switch (req.params.type) {
       case "adopter":
         const adopterHashedPassword = await bcrypt.hash(password, 12);
-        
+
         userData = await new Adopters({
           createdAt: new Date().toISOString(),
           name,
@@ -240,7 +238,7 @@ export const createUser = async (req, res) => {
       subject: "Account Verification Token",
       text:
         "Hello,\n\n" +
-        "Please verify your account by clicking the link: \nhttp://localhost:3000/confirmation/" +
+        "Please verify your account by clicking the link: \nhttps://www.adopsiku.site/confirmation/" +
         emailVerificationToken.token +
         ".\n" +
         "expired in 1 hour",
@@ -298,5 +296,3 @@ export const updateUser = async (req, res) => {
     res.status(400).send({ error: err });
   }
 };
-
-
