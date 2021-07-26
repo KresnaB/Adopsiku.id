@@ -190,7 +190,7 @@ export const getPets = async (req, res) => {
       filterAndSort(match, provMatch, sortBy, req.query);
     }
 
-    console.log(req.query)
+    console.log(req.query);
 
     //Pagination
     const PAGE_SIZE = 12;
@@ -204,7 +204,7 @@ export const getPets = async (req, res) => {
         path: "provider",
         match: provMatch,
       })
-      .exec()
+      .exec();
     //   const explain = await Pet.find(match).explain().
     //   then(res => res[0]);
     // // Object describing how MongoDB planned to execute the query
@@ -352,12 +352,14 @@ export const getPetsByProviderID = async (req, res) => {
 // @access  Public
 export const deletePet = async (req, res) => {
   try {
-    deletedOffer = await Pet.findOneAndRemove({
+    await Pet.findOneAndRemove({
       _id: req.params.id,
       provider: req.params.provid,
     });
+    await AdoptionRequest.deleteMany({ pet: req.params.id });
     res.send("delete success");
   } catch (err) {
+    console.log(err);
     res.status(400).send({ error: err });
   }
 };
@@ -377,7 +379,7 @@ export const updatePetStatus = async (req, res) => {
 export const getProviderPets = async (req, res) => {
   try {
     const provider = await User.findById({ _id: req.params.id });
-    const petOffers = await Pet.find({ provider: req.params.id })
+    const petOffers = await Pet.find({ provider: req.params.id });
     res.send({ provider, petOffers });
   } catch (err) {
     res.status(400).send({ error: err });

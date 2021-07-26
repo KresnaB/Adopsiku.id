@@ -1,13 +1,13 @@
-import Birds from "../../model/pet/birdOfferModel.js";
-import Cats from "../../model/pet/catOfferModel.js";
-import chickenOfferModel from "../../model/pet/chickenOfferModel.js";
-import Dogs from "../../model/pet/dogOfferModel.js";
-import Fishes from "../../model/pet/fishOfferModel.js";
-import Furies from "../../model/pet/furyOfferModel.js";
-import Rabbits from "../../model/pet/rabbitOfferModel.js";
-import Turtles from "../../model/pet/turtleOfferModel.js";
-import Pet from "../../model/pet/petModel.js";
-import Offer from "../../model/pet/offerModel.js";
+import Birds from "../../../model/pet/birdOfferModel.js";
+import Cats from "../../../model/pet/catOfferModel.js";
+import chickenOfferModel from "../../../model/pet/chickenOfferModel.js";
+import Dogs from "../../../model/pet/dogOfferModel.js";
+import Fishes from "../../../model/pet/fishOfferModel.js";
+import Furies from "../../../model/pet/furyOfferModel.js";
+import Rabbits from "../../../model/pet/rabbitOfferModel.js";
+import Turtles from "../../../model/pet/turtleOfferModel.js";
+import Pet from "../../../model/pet/petModel.js";
+import Offer from "../../../model/pet/offerModel.js";
 
 // @route   POST /petOffers/:type
 // @desc    Create a pet offer
@@ -158,7 +158,6 @@ export const createOffer = async (req, res) => {
   }
 };
 
-
 // @route   GET /petoffers/
 // @desc    Get all pet offers
 // @access  Public
@@ -174,20 +173,22 @@ export const getOffers = async (req, res) => {
     }
 
     const PAGE_SIZE = 12;
-    const page = parseInt(req.query.page || "0")
+    const page = parseInt(req.query.page || "0");
     const totalOffer = await Pet.countDocuments();
     const totalPage = Math.ceil(totalOffer / PAGE_SIZE);
 
-    const petOffers = await Offer.find(match) 
+    const petOffers = await Offer.find(match)
       .limit(PAGE_SIZE)
       .skip(PAGE_SIZE * page)
       .sort(sortBy)
       .populate({
-        path: 'pet',
-        match: petMatch })
+        path: "pet",
+        match: petMatch,
+      })
       .populate({
-        path: 'provider',
-        match: provMatch })
+        path: "provider",
+        match: provMatch,
+      })
       .exec();
 
     res.send({ petOffers, totalPage, totalOffer });
@@ -196,7 +197,13 @@ export const getOffers = async (req, res) => {
   }
 };
 
-export default function filterAndSort(match, petMatch, provMatch, sortBy, input) {
+export default function filterAndSort(
+  match,
+  petMatch,
+  provMatch,
+  sortBy,
+  input
+) {
   if (input) {
     const {
       time,
@@ -214,7 +221,7 @@ export default function filterAndSort(match, petMatch, provMatch, sortBy, input)
       vaccinated,
       trained,
       chirping,
-      cities
+      cities,
     } = input;
 
     if (time) {
@@ -228,22 +235,36 @@ export default function filterAndSort(match, petMatch, provMatch, sortBy, input)
     }
 
     if (category) petMatch["category"] = category;
-    if (source) { petMatch["source"] = { '$in': source } }    
-    if (breeds) { petMatch["breed"] = { '$in': breeds } }     
-    if (colors) { petMatch["color"] = { '$in': colors } }  
-    if (furLength) { petMatch["furLength"] = { '$in': furLength } }  
-    if (chirping) { petMatch["chirping"] = { '$in': chirping } }  
-    if (cities) { provMatch["address.city"] = { '$in': cities } }  
-    if (colors) { petMatch["color"] = { '$in': colors } }  
+    if (source) {
+      petMatch["source"] = { $in: source };
+    }
+    if (breeds) {
+      petMatch["breed"] = { $in: breeds };
+    }
+    if (colors) {
+      petMatch["color"] = { $in: colors };
+    }
+    if (furLength) {
+      petMatch["furLength"] = { $in: furLength };
+    }
+    if (chirping) {
+      petMatch["chirping"] = { $in: chirping };
+    }
+    if (cities) {
+      provMatch["address.city"] = { $in: cities };
+    }
+    if (colors) {
+      petMatch["color"] = { $in: colors };
+    }
     if (trained) match["trained"] = trained;
     if (spayedNeutered) match["spayedNeutered"] = spayedNeutered;
     if (vaccinated) match["vaccinated"] = vaccinated;
 
     if (gender) {
-      if(gender.length === 1){
-        if(gender[0] === 'Jantan'){
+      if (gender.length === 1) {
+        if (gender[0] === "Jantan") {
           petMatch["gender"] = true;
-        }else{
+        } else {
           petMatch["gender"] = false;
         }
       }
