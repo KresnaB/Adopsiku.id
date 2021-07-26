@@ -92,8 +92,9 @@ const Provider = ({ id }) => {
                 </Grid>
               </Grid>
             </Grid>
+            {provider.veterinarian?
             <Grid item lg={4} md={4} sm={12} xs={12} className={classes.grid1}>
-            <Typography variant="h6" className={classes.title}>Klinik hewan langganan</Typography>
+              <Typography variant="h6" className={classes.title}>Klinik hewan langganan</Typography>
               <Grid container className={classes.value}>
                 <Grid item lg={1} md={1} sm={2} xs={2} >
                   <Home/>
@@ -118,7 +119,8 @@ const Provider = ({ id }) => {
                   <Typography variant="body1">{provider.veterinarian.address}</Typography>
                 </Grid>
               </Grid>
-            </Grid>
+            </Grid>:null
+            }
           </Grid>
           <Grid container>
             <Grid className={classes.container} container spacing={1}>
