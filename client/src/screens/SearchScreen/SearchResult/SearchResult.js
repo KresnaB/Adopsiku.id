@@ -110,6 +110,8 @@ const SearchResult = ({ category }) => {
     }
   }, [dispatch, cities]);
 
+
+
   const applyFilter = () => {
     let newQuery;
     if (sort === "oldest" || sort === "newest") {
@@ -164,6 +166,10 @@ const SearchResult = ({ category }) => {
     }
     setQuery(newQuery);
   };
+
+  useEffect(()=>{
+    applyFilter()
+  }, [sort])
 
   const handleChange = (change) => {
     setPage(page + change);

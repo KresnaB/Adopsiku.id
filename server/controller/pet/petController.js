@@ -190,6 +190,8 @@ export const getPets = async (req, res) => {
       filterAndSort(match, provMatch, sortBy, req.query);
     }
 
+    console.log(req.query)
+
     //Pagination
     const PAGE_SIZE = 12;
     const page = parseInt(req.query.page || "0");
@@ -203,12 +205,12 @@ export const getPets = async (req, res) => {
         match: provMatch,
       })
       .exec()
-      const explain = await Pet.find(match).explain().
-      then(res => res[0]);
-    // Object describing how MongoDB planned to execute the query
-    console.log(explain.queryPlanner);
-    // Object containing stats about how MongoDB executed the query
-    console.log(explain.executionStats);
+    //   const explain = await Pet.find(match).explain().
+    //   then(res => res[0]);
+    // // Object describing how MongoDB planned to execute the query
+    // console.log(explain.queryPlanner);
+    // // Object containing stats about how MongoDB executed the query
+    // console.log(explain.executionStats);
 
     const petOffers = pets.filter((pet) => pet.provider !== null);
     const totalOffer = petOffers.length;
