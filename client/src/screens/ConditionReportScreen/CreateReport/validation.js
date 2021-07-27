@@ -13,7 +13,7 @@ const validation = (values) => {
   } else if (values.photos.length > 3) {
     errors.photos = "Max three photos";
   }
-  if (!values.type) {
+  if (values.type === "") {
     errors.type = "Type is required";
   }
   if (!values.title) {

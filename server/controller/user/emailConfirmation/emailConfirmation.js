@@ -84,7 +84,7 @@ export const resend = async (req, res) => {
       subject: "Account Verification Token",
       text:
         "Hello,\n\n" +
-        "Please verify your account by clicking the link: \nhttp://localhost:3000/confirmation/" +
+        "Please verify your account by clicking the link: \nhttps://www.adopsiku.site/confirmation/" +
         emailToken.token +
         ".\n" +
         "expired in 1 hour",
