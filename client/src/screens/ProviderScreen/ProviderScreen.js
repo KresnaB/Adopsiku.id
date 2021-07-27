@@ -19,13 +19,22 @@ const Provider = ({ id }) => {
   const { loading, provider, petOffers, totalPage, error } = providerInfo;
   const dispatch = useDispatch();
 
-  console.log(loading)
+  console.log(provider)
+
+  // useEffect(() => {
+  //   if(provider === undefined){
+  //     dispatch(getProviderPets(id));
+  //   }
+  // }, [dispatch, id, provider]);
 
   useEffect(() => {
-    if(provider === undefined){
+    if (
+      provider === undefined ||
+      provider._id !== id
+    ) {
       dispatch(getProviderPets(id));
     }
-  }, [dispatch, id, provider]);
+  }, [dispatch, id]);
 
   return (
     <>
@@ -92,7 +101,7 @@ const Provider = ({ id }) => {
                 </Grid>
               </Grid>
             </Grid>
-            {provider.veterinarian?
+            {provider.role === "OrganizationalProvider"?
             <Grid item lg={4} md={4} sm={12} xs={12} className={classes.grid1}>
               <Typography variant="h6" className={classes.title}>Klinik hewan langganan</Typography>
               <Grid container className={classes.value}>

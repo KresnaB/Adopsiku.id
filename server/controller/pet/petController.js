@@ -195,7 +195,7 @@ export const getPets = async (req, res) => {
     //Pagination
     const PAGE_SIZE = 12;
     const page = parseInt(req.query.page || "0");
-
+console.log(match)
     const pets = await Pet.find(match)
       .limit(PAGE_SIZE)
       .skip(PAGE_SIZE * page)
@@ -205,12 +205,13 @@ export const getPets = async (req, res) => {
         match: provMatch,
       })
       .exec();
-    //   const explain = await Pet.find(match).explain().
-    //   then(res => res[0]);
-    // // Object describing how MongoDB planned to execute the query
-    // console.log(explain.queryPlanner);
-    // // Object containing stats about how MongoDB executed the query
-    // console.log(explain.executionStats);
+
+      const explain = await Pet.find(match).explain().
+      then(res => res[0]);
+    // Object describing how MongoDB planned to execute the query
+    console.log(explain.queryPlanner);
+    // Object containing stats about how MongoDB executed the query
+    console.log(explain.executionStats);
 
     const petOffers = pets.filter((pet) => pet.provider !== null);
     const totalOffer = petOffers.length;
@@ -258,10 +259,10 @@ export default function filterAndSort(match, provMatch, sortBy, input) {
       match["source"] = { $in: source };
     }
     if (breeds) {
-      match["breed"] = { $in: breeds };
+      match["breeds"] = { $in: breeds };
     }
     if (colors) {
-      match["color"] = { $in: colors };
+      match["colors"] = { $in: colors };
     }
     if (furLength) {
       match["furLength"] = { $in: furLength };
@@ -271,9 +272,6 @@ export default function filterAndSort(match, provMatch, sortBy, input) {
     }
     if (cities) {
       provMatch["address.city"] = { $in: cities };
-    }
-    if (colors) {
-      match["color"] = { $in: colors };
     }
     if (trained) match["trained"] = trained;
     if (spayedNeutered) match["spayedNeutered"] = spayedNeutered;
