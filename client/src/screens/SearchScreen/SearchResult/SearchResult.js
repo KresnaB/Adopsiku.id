@@ -39,8 +39,8 @@ const SearchResult = ({ category }) => {
     color: [],
     fur: [],
     chirp: [],
-    crow:[],
-    diameter:[],
+    crow: [],
+    diameter: [],
     gender: [],
     size: [],
     source: [],
@@ -110,8 +110,6 @@ const SearchResult = ({ category }) => {
     }
   }, [dispatch, cities]);
 
-
-
   const applyFilter = () => {
     let newQuery;
     if (sort === "oldest" || sort === "newest") {
@@ -167,9 +165,9 @@ const SearchResult = ({ category }) => {
     setQuery(newQuery);
   };
 
-  useEffect(()=>{
-    applyFilter()
-  }, [sort])
+  useEffect(() => {
+    applyFilter();
+  }, [sort]);
 
   const handleChange = (change) => {
     setPage(page + change);
@@ -301,7 +299,7 @@ const SearchResult = ({ category }) => {
                   </List>
                 }
               />
-              {["Cat", "Dog", "Rabbit"].find((pet) => pet === category) ? 
+              {["Cat", "Dog", "Rabbit"].find((pet) => pet === category) ? (
                 <>
                   <Filter
                     title="Kesehatan"
@@ -331,7 +329,8 @@ const SearchResult = ({ category }) => {
                       </List>
                     }
                   />
-                </>:null}
+                </>
+              ) : null}
               <Filter
                 title="Warna"
                 applyFilter={applyFilter}
@@ -351,7 +350,7 @@ const SearchResult = ({ category }) => {
                   </List>
                 }
               />
-              {["Cat", "Dog"].find((pet) => pet === category) ? 
+              {["Cat", "Dog"].find((pet) => pet === category) ? (
                 <>
                   <Filter
                     title="Panjang bulu"
@@ -361,14 +360,19 @@ const SearchResult = ({ category }) => {
                         {["Pendek", "Sedang", "Panjang"].map((fur) => (
                           <BodyFilter
                             item={fur}
-                            handleChange={handleChecked("fur", fur, checked.fur)}
+                            handleChange={handleChecked(
+                              "fur",
+                              fur,
+                              checked.fur
+                            )}
                             checked={checked.fur.indexOf(fur) !== -1}
                           />
                         ))}
                       </List>
                     }
                   />
-              </>:null}
+                </>
+              ) : null}
               {category === "Bird" ? (
                 <Filter
                   title="Kicauan"
@@ -445,7 +449,15 @@ const SearchResult = ({ category }) => {
                   </List>
                 }
               />
-              {["Cat", "Dog", "Rabbit", "Bird", "Chicken", "Fish", "Turtle"].find((pet) => pet === category) ? 
+              {[
+                "Cat",
+                "Dog",
+                "Rabbit",
+                "Bird",
+                "Chicken",
+                "Fish",
+                "Turtle",
+              ].find((pet) => pet === category) ? (
                 <>
                   <Filter
                     title="Ukuran"
@@ -455,15 +467,22 @@ const SearchResult = ({ category }) => {
                         {["Kecil", "Sedang", "Besar"].map((size) => (
                           <BodyFilter
                             item={size}
-                            handleChange={handleChecked("size", size, checked.size)}
+                            handleChange={handleChecked(
+                              "size",
+                              size,
+                              checked.size
+                            )}
                             checked={checked.size.indexOf(size) !== -1}
                           />
                         ))}
                       </List>
                     }
                   />
-              </>:null}
-              {["Cat", "Dog", "Bird", "Fury"].find((pet) => pet === category) ? 
+                </>
+              ) : null}
+              {["Cat", "Dog", "Bird", "Fury"].find(
+                (pet) => pet === category
+              ) ? (
                 <>
                   <Filter
                     title="Terlatih"
@@ -473,36 +492,43 @@ const SearchResult = ({ category }) => {
                         <BodyFilter
                           item={"Terlatih"}
                           handleChange={(e) => {
-                            setChecked({ ...checked, trained: e.target.checked });
+                            setChecked({
+                              ...checked,
+                              trained: e.target.checked,
+                            });
                           }}
                           checked={checked.trained}
                         />
                       </List>
                     }
                   />
-                </>:null}
-              {["Cat", "Dog", "Rabbit", "Bird", "Chicken"].find((pet) => pet === category) ? 
+                </>
+              ) : null}
+              {["Cat", "Dog", "Rabbit", "Bird", "Chicken"].find(
+                (pet) => pet === category
+              ) ? (
                 <>
                   <Filter
-                  title="Sumber"
-                  applyFilter={applyFilter}
-                  body={
-                    <List className={classes.root} dense>
-                      {["Rescue", "Peliharaan"].map((source) => (
-                        <BodyFilter
-                          item={source}
-                          handleChange={handleChecked(
-                            "source",
-                            source,
-                            checked.source
-                          )}
-                          checked={checked.source.indexOf(source) !== -1}
-                        />
-                      ))}
-                    </List>
-                  }
-                />
-              </>:null }
+                    title="Sumber"
+                    applyFilter={applyFilter}
+                    body={
+                      <List className={classes.root} dense>
+                        {["Rescue", "Peliharaan"].map((source) => (
+                          <BodyFilter
+                            item={source}
+                            handleChange={handleChecked(
+                              "source",
+                              source,
+                              checked.source
+                            )}
+                            checked={checked.source.indexOf(source) !== -1}
+                          />
+                        ))}
+                      </List>
+                    }
+                  />
+                </>
+              ) : null}
               <Filter
                 title="Lokasi"
                 applyFilter={applyFilter}
