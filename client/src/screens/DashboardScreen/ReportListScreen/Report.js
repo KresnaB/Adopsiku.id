@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./styles";
 import moment from "moment";
@@ -11,7 +11,6 @@ import {
   CardContent,
   Chip,
   IconButton,
-  Button,
   CardActions,
 } from "@material-ui/core";
 import {
@@ -44,24 +43,6 @@ const Report = ({ report }) => {
     dispatch(deleteReport(report._id));
     setOpen(false);
   };
-
-  const body = (
-    <div className={classes.center}>
-      <div className={classes.paperModal}>
-        <h2 id="simple-modal-title">Hapus Laporan Adopsi?</h2>
-        <Button variant="contained" color="primary" onClick={handleDelete}>
-          Ya
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleDeleteModalClose}
-        >
-          Tidak
-        </Button>
-      </div>
-    </div>
-  );
   return (
     <TimelineItem>
       <TimelineOppositeContent style={{ flex: 0.3 }}>
@@ -172,14 +153,6 @@ const Report = ({ report }) => {
                   title="Hapus laporan kondisi hewan"
                   body="Apa kamu yakin untuk menghapus laporan kondisi hewan ini?"
                 />
-                {/* <Modal
-                  open={open}
-                  onClose={handleDeleteModalClose}
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                >
-                  {body}
-                </Modal> */}
               </div>
             ) : (
               <></>

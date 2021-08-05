@@ -1,5 +1,3 @@
-import moment from "moment";
-
 const validation = (values) => {
   const regexName = /^[a-zA-z]+([\s][a-zA-Z]+)*$/;
   const regexPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;

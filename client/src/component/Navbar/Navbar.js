@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Avatar,
-  Typography,
-  FormControl,
-  InputLabel,
-  Select,
-  Grid,
-} from "@material-ui/core";
+import { Avatar, Typography } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -89,7 +82,11 @@ export default function PrimarySearchAppBar() {
         </MenuItem>
       ) : null}
       {userInfo?.role === "Adopter" ? (
-        <MenuItem onClick={handleMenuClose} component={Link} to={"/conversations"}>
+        <MenuItem
+          onClick={handleMenuClose}
+          component={Link}
+          to={"/conversations"}
+        >
           Chat
         </MenuItem>
       ) : null}

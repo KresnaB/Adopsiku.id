@@ -41,7 +41,7 @@ const PetOffer = ({ petOffer }) => {
               color="textSecondary"
               component="p"
             >
-              {petOffer.status === 0 ? ("Dapat Diadopsi") : petOffer.status === 1 ? "Dalam Diskusi" : "Sudah Diadopsi"}
+              {petOffer.category}
             </Typography>
           </CardContent>
           <CardActions className={classes.cardActions}>

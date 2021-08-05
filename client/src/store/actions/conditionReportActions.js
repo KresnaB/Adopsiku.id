@@ -3,10 +3,8 @@ import {
   CONDITION_REPORTS_CREATE_REQUESTS,
   CONDITION_REPORTS_CREATE_SUCCESS,
   CONDITION_REPORTS_CREATE_FAIL,
-  CONDITION_REPORTS_UPDATE_REQUESTS,
   CONDITION_REPORTS_UPDATE_SUCCESS,
   CONDITION_REPORTS_UPDATE_FAIL,
-  CONDITION_REPORTS_DELETE_REQUESTS,
   CONDITION_REPORTS_DELETE_SUCCESS,
   CONDITION_REPORTS_DELETE_FAIL,
   CONDITION_REPORTS_LIST_REQUESTS,
@@ -49,7 +47,7 @@ export const createReport = (id, reportData, history) => async (dispatch) => {
 export const updateReport = (id, reportData, history) => async (dispatch) => {
   try {
     history.push("/reports");
-    const { data } = await api.updateReport(id, reportData);
+    await api.updateReport(id, reportData);
     dispatch({
       type: CONDITION_REPORTS_UPDATE_SUCCESS,
       payload: reportData,

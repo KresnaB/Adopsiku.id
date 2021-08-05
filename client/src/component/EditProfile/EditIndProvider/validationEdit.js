@@ -2,7 +2,6 @@ import moment from "moment";
 
 const validationEdit = (values) => {
   const regexName = /^[a-zA-z]+([\s][a-zA-Z]+)*$/;
-  const regexEmail = /^[^\s@]+@[^\s@]+$/;
   const regexNumber = /^[0-9]*$/;
   let errors = {};
 

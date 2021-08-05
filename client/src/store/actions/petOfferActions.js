@@ -1,30 +1,29 @@
 import * as api from "../../api/index";
 import {
-    PET_OFFER_LIST_REQUEST,
-    PET_OFFER_LIST_SUCCESS,
-    PET_OFFER_LIST_FAIL,    
-    SPECIFIC_USER_PET_OFFER_LIST_REQUEST,
-    SPECIFIC_USER_PET_OFFER_LIST_SUCCESS,
-    SPECIFIC_USER_PET_OFFER_LIST_FAIL,
-    PET_OFFER_DETAILS_REQUEST,
-    PET_OFFER_DETAILS_SUCCESS,
-    PET_OFFER_DETAILS_FAIL,
-    PET_OFFER_CREATE_REQUEST,
-    PET_OFFER_CREATE_SUCCESS,
-    PET_OFFER_CREATE_FAIL,
-    PET_OFFER_UPDATE_REQUEST,
-    PET_OFFER_UPDATE_SUCCESS,
-    PET_OFFER_UPDATE_FAIL,
-    PET_OFFER_UPDATE_RESET,
-    PROVIDER_PET_LIST_REQUEST,
-    PROVIDER_PET_LIST_SUCCESS,
-    PROVIDER_PET_LIST_FAIL,
-    PET_OFFER_DELETE_REQUEST,
-    PET_OFFER_DELETE_SUCCESS,
-    PET_OFFER_DELETE_FAIL,
-    PET_OFFER_STATUS_REQUEST,
-    PET_OFFER_STATUS_SUCCESS,
-    PET_OFFER_STATUS_FAIL,  
+  PET_OFFER_LIST_REQUEST,
+  PET_OFFER_LIST_SUCCESS,
+  PET_OFFER_LIST_FAIL,
+  SPECIFIC_USER_PET_OFFER_LIST_REQUEST,
+  SPECIFIC_USER_PET_OFFER_LIST_SUCCESS,
+  SPECIFIC_USER_PET_OFFER_LIST_FAIL,
+  PET_OFFER_DETAILS_REQUEST,
+  PET_OFFER_DETAILS_SUCCESS,
+  PET_OFFER_DETAILS_FAIL,
+  PET_OFFER_CREATE_REQUEST,
+  PET_OFFER_CREATE_SUCCESS,
+  PET_OFFER_CREATE_FAIL,
+  PET_OFFER_UPDATE_REQUEST,
+  PET_OFFER_UPDATE_SUCCESS,
+  PET_OFFER_UPDATE_FAIL,
+  PROVIDER_PET_LIST_REQUEST,
+  PROVIDER_PET_LIST_SUCCESS,
+  PROVIDER_PET_LIST_FAIL,
+  PET_OFFER_DELETE_REQUEST,
+  PET_OFFER_DELETE_SUCCESS,
+  PET_OFFER_DELETE_FAIL,
+  PET_OFFER_STATUS_REQUEST,
+  PET_OFFER_STATUS_SUCCESS,
+  PET_OFFER_STATUS_FAIL,
 } from "../../constants/petOfferConstants";
 
 export const listPetOffers = (query) => async (dispatch) => {
@@ -53,32 +52,30 @@ export const listPetOffers = (query) => async (dispatch) => {
   }
 };
 
-  export const getProviderPets = (id) => async (
-    dispatch
-  ) => {
-    try {
-      dispatch({ 
-        type: PROVIDER_PET_LIST_REQUEST 
-      })
-  
-      const { data } = await api.getProviderPets(id);
-      console.log(data)
-  
-      dispatch({
-        type: PROVIDER_PET_LIST_SUCCESS,
-        payload: data,
-      })
-    } catch (error) {
-      dispatch({
-        type: PROVIDER_PET_LIST_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      })
-    }
+export const getProviderPets = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: PROVIDER_PET_LIST_REQUEST,
+    });
+
+    const { data } = await api.getProviderPets(id);
+    console.log(data);
+
+    dispatch({
+      type: PROVIDER_PET_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PROVIDER_PET_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
   }
-  
+};
+
 export const userPetOffers = (id) => async (dispatch) => {
   try {
     dispatch({

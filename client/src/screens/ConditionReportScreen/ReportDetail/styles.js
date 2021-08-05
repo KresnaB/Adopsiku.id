@@ -85,20 +85,6 @@ export default makeStyles((theme) => ({
       display: "block",
     },
   },
-  carouselContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    [theme.breakpoints.down("md")]: {
-      display: "none",
-    },
-  },
-  miniCarousel: {
-    display: "none",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-    },
-  },
   text: {
     borderBottom: "0.2rem solid #FFB822",
   },

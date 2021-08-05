@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import useStyles from "./styles";
 import {
   Grid,
@@ -22,14 +22,15 @@ const ReportListScreen = ({ id }) => {
   const { loading, error, conditionReport } = reports;
   const user = useSelector((state) => state.userLogin.userInfo);
   useEffect(() => {
-    if (!conditionReport ||
+    if (
+      !conditionReport ||
       !conditionReport._id ||
       conditionReport._id !== id
     ) {
       dispatch(reportList(id));
     }
   }, [dispatch, id, conditionReport]);
-console.log(conditionReport)
+  console.log(conditionReport);
   return (
     <Grid container>
       {user.role === "Adopter" ? (

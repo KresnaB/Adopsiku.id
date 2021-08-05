@@ -192,10 +192,11 @@ export const getPets = async (req, res) => {
 
     console.log(req.query);
 
+    match.status = 0;
     //Pagination
     const PAGE_SIZE = 12;
     const page = parseInt(req.query.page || "0");
-console.log(match)
+    console.log(match);
     const pets = await Pet.find(match)
       .limit(PAGE_SIZE)
       .skip(PAGE_SIZE * page)
@@ -206,19 +207,21 @@ console.log(match)
       })
       .exec();
 
-      const explain = await Pet.find(match).explain().
-      then(res => res[0]);
+    const explain = await Pet.find(match)
+      .explain()
+      .then((res) => res[0]);
     // Object describing how MongoDB planned to execute the query
     console.log(explain.queryPlanner);
     // Object containing stats about how MongoDB executed the query
     console.log(explain.executionStats);
 
     const petOffers = pets.filter((pet) => pet.provider !== null);
-    const totalOffer = petOffers.length;
+    const totalOffer = await Pet.countDocuments(match);
     const totalPage = Math.ceil(totalOffer / PAGE_SIZE);
 
     res.send({ petOffers, totalPage, totalOffer });
   } catch (err) {
+    console.log(err);
     res.status(400).send({ error: err });
   }
 };

@@ -9,18 +9,17 @@ import {
   CircularProgress,
   Alert,
 } from "@material-ui/core";
-import { GoogleLogin } from "react-google-login";
+//import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import useStyles from "./styles";
 import Input from "../../../component/FormComponent/Input";
-import Icon from "./Icon";
 import {
   registerAdopter,
   registerIndProvider,
   registerOrgProvider,
 } from "../../../store/actions/userActions";
-import { GOOGLE_AUTH } from "../../../constants/actionTypes";
+//import { GOOGLE_AUTH } from "../../../constants/actionTypes";
 import validation from "./validation";
 
 const initialState = {
@@ -41,15 +40,15 @@ const Register = ({ role }) => {
   const [dataIsCorrect, setDataIsCorrect] = useState(false);
 
   const error = useSelector((state) => state);
-  const userLogin = useSelector((state) => state.userLogin);
+  //const userLogin = useSelector((state) => state.userLogin);
   const userRegister = useSelector((state) => state.userRegister);
-  const { loading, userInfo } = userRegister;
+  const { loading } = userRegister;
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && dataIsCorrect) {
       switch (role) {
         case "adopter":
-          dispatch(registerAdopter(formData, history)); // 1. Kalo misal adopter submit ke sini
+          dispatch(registerAdopter(formData, history));
           break;
         case "individual":
           dispatch(registerIndProvider(formData, history));
@@ -60,7 +59,6 @@ const Register = ({ role }) => {
         default:
           console.log(role);
       }
-      console.log("in");
     }
   }, [errors]);
   const handleShowPassword = () => {
@@ -76,19 +74,19 @@ const Register = ({ role }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const googleSuccess = async (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
-    console.log(result);
-    dispatch({ type: GOOGLE_AUTH, payload: { result, token } });
-    history.push(`/register/complete/${role}`);
-    // history.push('/petOffers');
-  };
+  // const googleSuccess = async (res) => {
+  //   const result = res?.profileObj;
+  //   const token = res?.tokenId;
+  //   console.log(result);
+  //   dispatch({ type: GOOGLE_AUTH, payload: { result, token } });
+  //   history.push(`/register/complete/${role}`);
+  //   // history.push('/petOffers');
+  // };
 
-  const googleFailure = (error) => {
-    console.log(error);
-    console.log("Google Sign in was unsuccesful. Try again later");
-  };
+  // const googleFailure = (error) => {
+  //   console.log(error);
+  //   console.log("Google Sign in was unsuccesful. Try again later");
+  // };
 
   let roleType;
   switch (role) {

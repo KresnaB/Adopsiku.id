@@ -6,14 +6,9 @@ import {
   Typography,
   Button,
   Chip,
-  Modal,
-  Paper,
-  AppBar,
-  Tabs,
-  Tab,
 } from "@material-ui/core";
 
-import React, { useState } from "react";
+import React from "react";
 import useStyles from "./styles";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -36,7 +31,7 @@ const Report = ({ report }) => {
         <div variant="body2">
           <Chip
             size="small"
-            label={report.reportDuration + " Bulan"}
+            label={report.reportDuration + " Minggu"}
             style={{ backgroundColor: "#66bb6a" }}
             className={classes.statusLabel}
           />

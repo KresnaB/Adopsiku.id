@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useStyles from "./styles";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { reportListByPet } from "../../../store/actions/conditionReportActions";
 import { Grid, Typography, CircularProgress, Alert } from "@material-ui/core";

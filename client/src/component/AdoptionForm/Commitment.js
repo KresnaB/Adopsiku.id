@@ -1,22 +1,13 @@
 import React from "react";
 import {
-  TextField,
   Button,
   Switch,
   Grid,
   Typography,
-  InputLabel,
-  FormControl,
   IconButton,
 } from "@material-ui/core";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import FileBase from "react-file-base64";
 import useStyles from "./styles";
-import {
-  ChevronLeftRounded,
-  ChevronRightRounded,
-  Done,
-} from "@material-ui/icons";
+import { ChevronLeftRounded, Done } from "@material-ui/icons";
 
 const Commitment = ({
   _id,
@@ -41,7 +32,9 @@ const Commitment = ({
       onSubmit={handleNext}
     >
       <Grid container className={classes.gridContainer}>
-        <Typography variant="body1" className={classes.title}>Persetujuan Keluarga</Typography>
+        <Typography variant="body1" className={classes.title}>
+          Persetujuan Keluarga
+        </Typography>
         <Grid item xs={10} sm={10} md={11} lg={11}>
           <Typography variant="body1">
             Apakah semua anggota keluarga sudah menyetujui rencana untuk
@@ -57,7 +50,9 @@ const Commitment = ({
             inputProps={{ "aria-label": "Family Approval" }}
           />
         </Grid>
-        <Typography variant="body1" className={classes.title}>Rencana Pindah</Typography>
+        <Typography variant="body1" className={classes.title}>
+          Rencana Pindah
+        </Typography>
         <Grid item xs={10} sm={10} md={11} lg={11}>
           <Typography variant="body1">
             Jika Anda pindah rumah/kota/negara, apakah Anda akan tetap membawa
@@ -73,7 +68,9 @@ const Commitment = ({
             inputProps={{ "aria-label": "Moving Plan" }}
           />
         </Grid>
-        <Typography variant="body1" className={classes.title}>Rencana Menikah</Typography>
+        <Typography variant="body1" className={classes.title}>
+          Rencana Menikah
+        </Typography>
         <Grid item xs={10} sm={10} md={11} lg={11}>
           <Typography variant="body1">
             Jika Anda mempunyai rencana/sudah menikah, apakah Anda dapat
@@ -90,7 +87,9 @@ const Commitment = ({
             inputProps={{ "aria-label": "Wedding Plan" }}
           />
         </Grid>
-        <Typography variant="body1" className={classes.title}>Rencana Anak</Typography>
+        <Typography variant="body1" className={classes.title}>
+          Rencana Anak
+        </Typography>
         <Grid item xs={10} sm={10} md={11} lg={11}>
           <Typography variant="body1">
             Jika Anda mempunyai rencana/sudah mempunyai anak, apakah Anda dapat
@@ -106,7 +105,9 @@ const Commitment = ({
             inputProps={{ "aria-label": "Child Plan" }}
           />
         </Grid>
-        <Typography variant="body1" className={classes.title}>Rencana Biaya</Typography>
+        <Typography variant="body1" className={classes.title}>
+          Rencana Biaya
+        </Typography>
         <Grid item xs={10} sm={10} md={11} lg={11}>
           <Typography variant="body1">
             Apakah Anda yakin bahwa Anda sanggup untuk memenuhi segala kebutuhan

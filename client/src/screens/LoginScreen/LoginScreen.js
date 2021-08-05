@@ -8,14 +8,13 @@ import {
   Container,
   CircularProgress,
 } from "@material-ui/core";
-import { GoogleLogin } from "react-google-login";
+//import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles";
 import Input from "./Input";
-import Icon from "./Icon";
-import { signin, googleSignIn } from "../../actions/auth";
+//import { signin, googleSignIn } from "../../actions/auth";
 import { login } from "../../store/actions/userActions";
 import { Alert } from "@material-ui/lab";
 
@@ -54,19 +53,19 @@ const LoginScreen = ({ location, history }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const googleSuccess = async (res) => {
-    const result = res?.profileObj;
-    try {
-      dispatch(googleSignIn(result, history));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const googleSuccess = async (res) => {
+  //   const result = res?.profileObj;
+  //   try {
+  //     dispatch(googleSignIn(result, history));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const googleFailure = (error) => {
-    console.log(error);
-    console.log("Google Sign in was unsuccesful. Try again later");
-  };
+  // const googleFailure = (error) => {
+  //   console.log(error);
+  //   console.log("Google Sign in was unsuccesful. Try again later");
+  // };
 
   console.log(loading);
   return (

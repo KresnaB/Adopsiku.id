@@ -1,9 +1,4 @@
-import moment from "moment";
-
 const validation = (values) => {
-  const regexName = /^[a-zA-z]+([\s][a-zA-Z]+)*$/;
-  const regexEmail = /^[^\s@]+@[^\s@]+$/;
-  const regexNumber = /^[0-9]*$/;
   let errors = {};
 
   console.log(values.photos);
