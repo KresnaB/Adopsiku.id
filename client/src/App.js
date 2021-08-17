@@ -38,7 +38,9 @@ import AdoptionsList from "./screens/ConditionReportScreen/AdoptionsList/Adoptio
 import ReportListScreen from "./screens/DashboardScreen/ReportListScreen/ReportListScreen";
 import AdoptionsListAdp from "./screens/ConditionReportScreen/AdoptionsListAdp/AdoptionsListAdp";
 import EditReportScreen from "./screens/ConditionReportScreen/EditReport/EditReportScreen";
-import ChatScreen from "./screens/ChatScreen/ChatScreen";
+//import ChatScreen from "./screens/ChatScreen/ChatScreen";
+import ChatScreen from "./screens/Chat/ChatScreen";
+import StartConversationScreen from "./screens/Chat/StartConversationScreen";
 
 const App = () => {
   const classes = useStyles();
@@ -152,19 +154,33 @@ const App = () => {
         <Route path="/conversations" exact>
           {isLogin ? (
             isLogin.role === "Adopter" ? (
-            <main className={classes.content}>
-              <Toolbar />
-              <ChatScreen />
-            </main>):<main className={classes.content}>
-              {/* <Drawer/> */}
-              <Toolbar />
-              <ChatScreen />
-            </main>
+              <main className={classes.content}>
+                <Toolbar />
+                <ChatScreen />
+              </main>
+            ) : (
+              <div className={classes.flex}>
+                <Drawer />
+                <main className={classes.content}>
+                  <Toolbar />
+                  <ChatScreen />
+                </main>
+              </div>
+            )
           ) : (
             <Redirect to={{ pathname: "/login" }} />
           )}
         </Route>
-
+        <Route
+          path="/start/conversations/:id"
+          exact
+          render={(props) => (
+            <main className={classes.content}>
+              <Toolbar />
+              <StartConversationScreen id={props.match.params.id} />
+            </main>
+          )}
+        />
         <Route
           path="/provider/:id"
           exact
@@ -279,8 +295,9 @@ const App = () => {
             <main className={classes.content}>
               {isLogin ? (
                 <ApplyAdoption id={props.match.params.id} />
-                ):(<Redirect to={{ pathname: "/login" }} />)
-              }
+              ) : (
+                <Redirect to={{ pathname: "/login" }} />
+              )}
             </main>
           )}
         />

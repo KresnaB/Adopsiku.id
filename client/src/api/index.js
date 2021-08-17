@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://adopsiku.herokuapp.com" });
+//const API = axios.create({ baseURL: "https://adopsiku.herokuapp.com" });
 
-//const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create({ baseURL: "http://localhost:5000" });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
@@ -126,5 +126,7 @@ export const createConversation = (newConversation) =>
   API.post("/conversations/", newConversation);
 export const getMessages = (conversationId) =>
   API.get(`/conversations/${conversationId}`);
+export const getArchives = (conversationId) =>
+  API.get(`/conversations/archives/${conversationId}`);
 export const sendMessage = (conversationId, newMessage) =>
   API.post(`/conversations/${conversationId}`, newMessage);

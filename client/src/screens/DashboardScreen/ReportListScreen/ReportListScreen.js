@@ -30,7 +30,6 @@ const ReportListScreen = ({ id }) => {
       dispatch(reportList(id));
     }
   }, [dispatch, id, conditionReport]);
-  console.log(conditionReport);
   return (
     <Grid container>
       {user.role === "Adopter" ? (
@@ -72,7 +71,7 @@ const ReportListScreen = ({ id }) => {
         </Grid>
       )}
 
-      <Grid item xs={12} md={12}>
+      <Grid item xs={12} md={12} className={classes.report}>
         <Grid container className={classes.center}>
           <Grid item xs={12} md={6}>
             <Timeline>

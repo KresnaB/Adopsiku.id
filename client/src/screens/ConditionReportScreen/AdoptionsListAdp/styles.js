@@ -6,6 +6,7 @@ export default makeStyles((theme) => ({
   },
   title: {
     marginLeft: "0.4rem",
+    display: "flex",
   },
   card: {
     display: "flex",

@@ -74,4 +74,8 @@ export default makeStyles((theme) => ({
     alignItems: "center",
     height: "20rem",
   },
+  report: {
+    height: "800px",
+    overflowY: "auto",
+  },
 }));

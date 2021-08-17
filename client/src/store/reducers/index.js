@@ -6,14 +6,15 @@ import {
   userPetOfferListReducer,
   petOfferCreateReducer,
   petOfferUpdateReducer,
-  providerPetsReducer
+  providerPetsReducer,
 } from "./petOfferReducers";
 
 import {
   conversationCreateReducer,
   conversationListReducer,
   messageCreateReducer,
-  messageListReducer
+  messageListReducer,
+  archivesReducer,
 } from "./conversationReducer";
 
 import {
@@ -66,7 +67,8 @@ export const reducers = combineReducers({
   conversationCreate: conversationCreateReducer,
   conversationList: conversationListReducer,
   messageCreate: messageCreateReducer,
-  messageList: messageListReducer
+  messageList: messageListReducer,
+  archiveList: archivesReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

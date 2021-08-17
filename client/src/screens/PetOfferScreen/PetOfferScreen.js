@@ -59,12 +59,9 @@ const PetOfferScreen = ({ id }) => {
                     {petOffer.name}
                   </Typography>
                   <div className={classes.subTitle1}>
-                      <Typography
-                        variant="h6"
-                        className={classes.subTitle2}
-                      >
-                        {petOffer.breeds.join(", ")}
-                      </Typography>
+                    <Typography variant="h6" className={classes.subTitle2}>
+                      {petOffer.breeds.join(", ")}
+                    </Typography>
                     <Typography className={classes.address} variant="h6">
                       {petOffer.provider.address.city +
                         ", " +
@@ -167,36 +164,51 @@ const PetOfferScreen = ({ id }) => {
               <Card fluid="true" className={classes.card2}>
                 <CardContent>
                   <div className={classes.buttonGroup}>
-                    { petOffer.status === 1 ?
-                        <>
-                          <Alert severity="info" className={classes.alertSuccess}>Dalam diskusi {adopter[0]? " dengan " + adopter[0].adopter.name :""} </Alert>
-                        </>
-                      : petOffer.status === 2 ?
+                    {petOffer.status === 1 ? (
                       <>
-                        <Alert severity="success" className={classes.alertSuccess}>Berhasil diadopsi {adopter[0]? " oleh " + adopter[0].adopter.name :""}</Alert>
+                        <Alert severity="info" className={classes.alertSuccess}>
+                          Dalam diskusi{" "}
+                          {adopter[0]
+                            ? " dengan " + adopter[0].adopter.name
+                            : ""}{" "}
+                        </Alert>
                       </>
-                      : user?.role !== "IndividualProvider" && user?.role !== "OrganizationalProvider"? (
-                        <>
-                          <Typography
-                            align="center"
-                            variant="h5"
-                            className={classes.subTitle3}
-                          >
-                            Tertarik dengan {petOffer.name}?
-                          </Typography>
-                          <Button
-                            className={classes.button2}
-                            component={Link}
-                            to={`/adoption/apply/${petOffer._id}`}
-                          >
-                            Ajukan Adopsi
-                          </Button>
-                          <Button className={classes.button2}>
-                            Chat {petOffer.provider.name}
-                          </Button>
-                        </>
-                       ):null
-                    }
+                    ) : petOffer.status === 2 ? (
+                      <>
+                        <Alert
+                          severity="success"
+                          className={classes.alertSuccess}
+                        >
+                          Berhasil diadopsi{" "}
+                          {adopter[0] ? " oleh " + adopter[0].adopter.name : ""}
+                        </Alert>
+                      </>
+                    ) : user?.role !== "IndividualProvider" &&
+                      user?.role !== "OrganizationalProvider" ? (
+                      <>
+                        <Typography
+                          align="center"
+                          variant="h5"
+                          className={classes.subTitle3}
+                        >
+                          Tertarik dengan {petOffer.name}?
+                        </Typography>
+                        <Button
+                          className={classes.button2}
+                          component={Link}
+                          to={`/adoption/apply/${petOffer._id}`}
+                        >
+                          Ajukan Adopsi
+                        </Button>
+                        <Button
+                          className={classes.button2}
+                          component={Link}
+                          to={`/start/conversations/${petOffer.provider._id}`}
+                        >
+                          Chat {petOffer.provider.name}
+                        </Button>
+                      </>
+                    ) : null}
                     <Typography variant="h6" className={classes.subTitle3}>
                       Ditawarkan oleh
                     </Typography>

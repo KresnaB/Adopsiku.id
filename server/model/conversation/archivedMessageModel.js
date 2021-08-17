@@ -2,21 +2,21 @@ import mongoose from "mongoose";
 import Message from "./messageSchema.js";
 const ObjectId = mongoose.Types.ObjectId;
 
-const conversationOptions = {
-  collection: "conversation", // the name of our collection
+const archivedMessageOptions = {
+  collection: "archivedmessage", // the name of our collection
 };
 
 // User schema: these properties will be shared with our "real" schemas
-const Conversation = mongoose.model(
-  "Conversation",
+const ArchivedMessage = mongoose.model(
+  "ArchivedMessage",
   new mongoose.Schema(
     {
-      participants: [{ type: ObjectId, ref: "User", required: true }],
+      conversationId: { type: ObjectId, ref: "Conversation", required: true },
       count: { type: Number, default: 50, required: true },
       messages: [Message],
     },
-    conversationOptions
+    archivedMessageOptions
   )
 );
 
-export default Conversation;
+export default ArchivedMessage;

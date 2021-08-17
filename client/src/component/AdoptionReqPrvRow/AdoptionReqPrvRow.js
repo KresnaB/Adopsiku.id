@@ -15,15 +15,16 @@ import {
   Chat,
   Timer,
   HourglassFull,
-  Block
+  Block,
 } from "@material-ui/icons";
 import moment from "moment";
 import useStyles from "./styles";
 import ConfirmationDialog from "../Modal/ConfirmationDialog";
 import AdoptionReqDetail from "../AdoptionReqDetail/AdoptionReqDetail/AdoptionReqDetail";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { setReportDuration } from "../../store/actions/petOfferActions";
 import ReviewCountdown from "../../screens/DashboardScreen/AdoptionReqScreen/ReviewCountdown";
+import { Link } from "react-router-dom";
 
 const AdoptionReqPrvRow = ({
   key,
@@ -114,22 +115,28 @@ const AdoptionReqPrvRow = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(setReportDuration(pet._id, duration));
-    handleCloseDurationModal()
+    handleCloseDurationModal();
   };
 
-  const total = Date.parse(moment(createdAt).add(2, 'd')) - Date.parse(new Date());
+  const total =
+    Date.parse(moment(createdAt).add(2, "d")) - Date.parse(new Date());
   const seconds = Math.floor((total / 1000) % 60);
   const minutes = Math.floor((total / 1000 / 60) % 60);
   const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
   const days = Math.floor(total / (1000 * 60 * 60 * 24));
-    
-  const hoursMinSecs = {days: days, hours:hours, minutes: minutes, seconds: seconds}
+
+  const hoursMinSecs = {
+    days: days,
+    hours: hours,
+    minutes: minutes,
+    seconds: seconds,
+  };
 
   useEffect(() => {
-    if(status === 0 && total <= 0){
-      handleCancelStatus()
+    if (status === 0 && total <= 0) {
+      handleCancelStatus();
     }
-  }, [total])
+  }, [total]);
 
   return (
     <>
@@ -142,35 +149,50 @@ const AdoptionReqPrvRow = ({
         </TableCell>
         <TableCell align="center" className={classes.hide}>
           {moment(createdAt).format("DD MMM YYYY HH:mm:ss")}
-          {status === 0 && total > 0? 
-            <ReviewCountdown hoursMinSecs={hoursMinSecs}/>
-            : null
-          }
+          {status === 0 && total > 0 ? (
+            <ReviewCountdown hoursMinSecs={hoursMinSecs} />
+          ) : null}
         </TableCell>
         <TableCell align="center">
           <Chip
             size="small"
-            label={ status === 0 ? "Menunggu" : status === 1 ? "Dalam Diskusi" : status === 2 ? "Diterima" : status === 3 ? "Ditolak" : "Dibatalkan" }
+            label={
+              status === 0
+                ? "Menunggu"
+                : status === 1
+                ? "Dalam Diskusi"
+                : status === 2
+                ? "Diterima"
+                : status === 3
+                ? "Ditolak"
+                : "Dibatalkan"
+            }
             disabled={compLoading ? true : false}
-            onClick={status === 0 || status === 1 ? handleOpenStatusModal:null}
+            onClick={
+              status === 0 || status === 1 ? handleOpenStatusModal : null
+            }
             style={
-              status === 0 ? { backgroundColor: "#fade2a" }
-              : status === 1 ? { backgroundColor: "#49b4d1" }
-              : status === 2 ? { backgroundColor: "#66bb6a" }
-              : status === 3 ? { backgroundColor: "#e57373" }
-              : { backgroundColor: "#f58142" }
+              status === 0
+                ? { backgroundColor: "#fade2a" }
+                : status === 1
+                ? { backgroundColor: "#49b4d1" }
+                : status === 2
+                ? { backgroundColor: "#66bb6a" }
+                : status === 3
+                ? { backgroundColor: "#e57373" }
+                : { backgroundColor: "#f58142" }
             }
             className={classes.statusLabel}
           />
-          {status === 0 || status === 1 ?
+          {status === 0 || status === 1 ? (
             <IconButton
-            className={classes.tableActionButton}
-            aria-label="expand row"
-            size="small"
-            disabled={compLoading ? true : false}
-            onClick={handleOpenStatusModal}
+              className={classes.tableActionButton}
+              aria-label="expand row"
+              size="small"
+              disabled={compLoading ? true : false}
+              onClick={handleOpenStatusModal}
             >
-            {status === 0 ? (
+              {status === 0 ? (
                 <HourglassFull
                   style={{ color: "#fade2a" }}
                   className={classes.statusIcon}
@@ -180,32 +202,38 @@ const AdoptionReqPrvRow = ({
                   style={{ color: "#49b4d1" }}
                   className={classes.statusIcon}
                 />
-            )}
+              )}
             </IconButton>
-            : status === 2 ?
-              <CheckCircle
-                  style={{ color: "#66bb6a" }}
-                  className={classes.statusIcon}
-              />
-            : status === 3 ?
-              <Cancel
-                  style={{ color: "#e57373" }}
-                  className={classes.statusIcon}
-              />
-            :
-              <Block
-                  style={{ color: "#f58142" }}
-                  className={classes.statusIcon}
-              />
-          }
+          ) : status === 2 ? (
+            <CheckCircle
+              style={{ color: "#66bb6a" }}
+              className={classes.statusIcon}
+            />
+          ) : status === 3 ? (
+            <Cancel
+              style={{ color: "#e57373" }}
+              className={classes.statusIcon}
+            />
+          ) : (
+            <Block
+              style={{ color: "#f58142" }}
+              className={classes.statusIcon}
+            />
+          )}
           <ConfirmationDialog
             adopt
             handleOpen={openStatusModal}
             handleClose={handleCloseStatusModal}
             handleAccept={handleRejectStatus}
-            handleAction={status === 0 ? handleDiscussionStatus : handleAcceptStatus}
+            handleAction={
+              status === 0 ? handleDiscussionStatus : handleAcceptStatus
+            }
             title="Ubah Status Pengajuan Adopsi"
-            body={status === 0 ? "Setelah melihat data pengadopsi, terima pengajuan adopsi dan lanjutkan diskusi melalui chat?" : "Setelah melakukan diskusi, apakah anda yakin untuk menerima pengajuan dan menyerahkan hewan adopsi kepada pengadopsi?"}
+            body={
+              status === 0
+                ? "Setelah melihat data pengadopsi, terima pengajuan adopsi dan lanjutkan diskusi melalui chat?"
+                : "Setelah melakukan diskusi, apakah anda yakin untuk menerima pengajuan dan menyerahkan hewan adopsi kepada pengadopsi?"
+            }
           />
         </TableCell>
         <TableCell align="center">
@@ -225,24 +253,38 @@ const AdoptionReqPrvRow = ({
               />
             </IconButton>
           </Tooltip>
-          {status === 2 ? 
-            (<Tooltip
+          <Tooltip
+            id="tooltip-top-start"
+            title="Chat"
+            placement="top"
+            classes={{ tooltip: classes.tooltip }}
+          >
+            <IconButton aria-label="Chat" className={classes.tableActionButton}>
+              <Link to={`/start/conversations/${adopter._id}`}>
+                <Chat
+                  className={classes.tableActionButtonIcon + " " + classes.info}
+                />
+              </Link>
+            </IconButton>
+          </Tooltip>
+          {status === 2 ? (
+            <Tooltip
               id="tooltip-top-start"
               title="Durasi pelaporan"
               placement="top"
               classes={{ tooltip: classes.tooltip }}
             >
-            <IconButton
-              aria-label="Durasi Pelaporan"
-              className={classes.tableActionButton}
-              onClick={handleOpenDurationModal}
-            >
-              <Timer
-                className={classes.tableActionButtonIcon + " " + classes.info}
-              />
-            </IconButton>
-          </Tooltip>) : null
-          }
+              <IconButton
+                aria-label="Durasi Pelaporan"
+                className={classes.tableActionButton}
+                onClick={handleOpenDurationModal}
+              >
+                <Timer
+                  className={classes.tableActionButtonIcon + " " + classes.info}
+                />
+              </IconButton>
+            </Tooltip>
+          ) : null}
           <ConfirmationDialog
             adopt
             noAction
@@ -269,14 +311,18 @@ const AdoptionReqPrvRow = ({
             handleAction={handleSubmit}
             title="Atur durasi laporan kondisi hewan"
             body={
-              <form className={classes.container} autoComplete="off" noValidate >
+              <form className={classes.container} autoComplete="off" noValidate>
                 <TextField
                   label="Durasi pelaporan"
                   type="number"
-                  onChange={(e)=> setDuration(e.target.value)}
+                  onChange={(e) => setDuration(e.target.value)}
                   value={duration}
                   inputProps={{ min: "0", max: "12", step: "1" }}
-                  InputProps={{ endAdornment: <InputAdornment position="end">Minggu</InputAdornment> }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">Minggu</InputAdornment>
+                    ),
+                  }}
                   size="small"
                 />
               </form>

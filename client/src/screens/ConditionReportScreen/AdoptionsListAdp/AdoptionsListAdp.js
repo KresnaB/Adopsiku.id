@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { reportListByAdoption } from "../../../store/actions/conditionReportActions";
 import { Grid, Typography, CircularProgress, Alert } from "@material-ui/core";
 import Report from "../../../component/Report/Report";
+import Pets from "@material-ui/icons/Pets";
 
 const AdoptionsListAdp = () => {
   const classes = useStyles();
@@ -35,6 +36,7 @@ const AdoptionsListAdp = () => {
         <Grid container>
           <Grid item xs={12}>
             <Typography variant="h6" className={classes.title}>
+              <Pets />
               Daftar hewan yang berhasil diadopsi
             </Typography>
           </Grid>
