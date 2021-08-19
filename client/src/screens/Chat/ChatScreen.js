@@ -17,7 +17,7 @@ import {
   sendMessage,
   getArchives,
 } from "../../store/actions/conversationActions";
-import { io } from "socket.io-client";
+import socketIOClient, { io } from "socket.io-client";
 import { History, Chat, Send } from "@material-ui/icons";
 
 const ChatScreen = () => {
@@ -44,7 +44,7 @@ const ChatScreen = () => {
   const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("https://adopsiku-chat.herokuapp.com/");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -67,10 +67,14 @@ const ChatScreen = () => {
   }, [arrivalMessage]);
 
   useEffect(() => {
+    console.log("in");
     socket.current.emit("addUser", userInfo.id);
+    console.log("in2");
     socket.current.on("getUsers", (users) => {
+      console.log(users);
       setOnlineUsers(users);
     });
+    console.log("in3");
   }, [userInfo]);
 
   useEffect(() => {
@@ -161,7 +165,6 @@ const ChatScreen = () => {
     }
   };
 
-  console.log(message);
   return (
     <>
       {loading === undefined || loading ? (
