@@ -44,6 +44,7 @@ const ChatScreen = () => {
   const scrollRef = useRef();
 
   useEffect(() => {
+    //socket.current = io("http://localhost:8900", { transports: ["websocket"] });
     socket.current = io("https://adopsiku-chat.herokuapp.com/");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
