@@ -161,6 +161,7 @@ const ChatScreen = () => {
     }
   };
 
+  console.log(message);
   return (
     <>
       {loading === undefined || loading ? (

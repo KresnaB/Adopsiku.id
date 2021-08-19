@@ -316,7 +316,39 @@ export const getPetById = async (req, res) => {
 // @access  Public
 export const updatePet = async (req, res) => {
   try {
-    const petOffer = await Pet.findByIdAndUpdate(req.params.id, req.body);
+    let petOffer;
+    switch (req.body.category) {
+      case "Bird":
+        petOffer = await Birds.findByIdAndUpdate(req.params.id, req.body);
+        break;
+      case "Cat":
+        petOffer = await Cats.findByIdAndUpdate(req.params.id, req.body);
+        break;
+      case "Chicken":
+        petOffer = await chickenOfferModel.findByIdAndUpdate(
+          req.params.id,
+          req.body
+        );
+        break;
+      case "Dog":
+        petOffer = await Dogs.findByIdAndUpdate(req.params.id, req.body);
+        break;
+      case "Fish":
+        petOffer = await Fishes.findByIdAndUpdate(req.params.id, req.body);
+        break;
+      case "Fury":
+        petOffer = await Furies.findByIdAndUpdate(req.params.id, req.body);
+        break;
+      case "Rabbit":
+        petOffer = await Rabbits.findByIdAndUpdate(req.params.id, req.body);
+        break;
+      case "Turtle":
+        petOffer = await Turtles.findByIdAndUpdate(req.params.id, req.body);
+        break;
+      default:
+        petOffer = await Pet.findByIdAndUpdate(req.params.id, req.body);
+        break;
+    }
 
     res.send({ petOffer });
   } catch (err) {

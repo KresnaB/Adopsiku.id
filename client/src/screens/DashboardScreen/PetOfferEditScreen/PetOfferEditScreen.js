@@ -108,7 +108,6 @@ const PetOfferEditScreen = ({ id }) => {
       ) {
         dispatch(listPetOfferDetails(id));
       } else {
-        console.log(petOffer);
         setPetData(petOffer);
         setPetType(petOffer.category);
       }
@@ -158,13 +157,13 @@ const PetOfferEditScreen = ({ id }) => {
         min = 0;
         max = 1000000;
       }
-      if (value < min) {
+      if (parseInt(value) < min) {
         value = min;
       }
-      if (value > max) {
+      if (parseInt(value) > max) {
         value = max;
       }
-      setPetData({ ...petData, [name]: value });
+      setPetData({ ...petData, [name]: parseInt(value) });
     } else {
       name === "spayedNeutered" || name === "vaccinated" || name === "trained"
         ? setPetData({ ...petData, [name]: checked })
@@ -184,6 +183,7 @@ const PetOfferEditScreen = ({ id }) => {
     }
     setPetData({ ...petData, media: fileArray });
   };
+
   if (petType) {
     switch (petType) {
       case "Cat":

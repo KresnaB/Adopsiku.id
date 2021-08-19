@@ -7,18 +7,14 @@ import ArchivedMessage from "../../model/conversation/archivedMessageModel.js";
 // @access  Adopter
 export const createConversation = async (req, res) => {
   try {
-    console.log("in1");
-    console.log(req.body);
     const checkConvExist = await Conversation.find({
       participants: [req.body.senderId, req.body.receiverId],
       participants: [req.body.receiverId, req.body.senderId],
     });
     if (checkConvExist.length !== 0) {
-      console.log(checkConvExist);
       res.status(200).send({ message: "Percakapan sudah ada" });
       return;
     }
-    console.log("in3");
     const newConversation = await Conversation.create({
       participants: [req.body.senderId, req.body.receiverId],
     });

@@ -44,7 +44,7 @@ const FishForm = ({
   const isValid =
     name.length > 0 &&
     !error.name &&
-    gender.length > 0 &&
+    gender !== undefined > 0 &&
     breeds.length > 0 &&
     colors.length > 0 &&
     age > 0 &&
@@ -53,7 +53,7 @@ const FishForm = ({
     !error.specialNeeds &&
     description.length > 0 &&
     !error.description &&
-    media.length > 0 &&
+    media !== undefined &&
     adoptFee >= 0 &&
     !error.adoptFee &&
     size >= 0 &&
@@ -127,7 +127,15 @@ const FishForm = ({
               aria-label="gender"
               className={classes.radio}
               name="gender"
-              value={_id ? (gender ? "true" : "false") : gender}
+              value={
+                _id
+                  ? typeof gender === "boolean"
+                    ? gender
+                      ? "true"
+                      : "false"
+                    : gender
+                  : gender
+              }
               onChange={handleChange}
             >
               <FormControlLabel

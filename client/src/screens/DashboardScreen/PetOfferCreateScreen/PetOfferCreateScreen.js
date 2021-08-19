@@ -170,13 +170,13 @@ const PetOfferCreateScreen = () => {
         min = 0;
         max = 1000000;
       }
-      if (value < min) {
+      if (parseInt(value) < min) {
         value = min;
       }
-      if (value > max) {
+      if (parseInt(value) > max) {
         value = max;
       }
-      setPetData({ ...petData, [name]: value });
+      setPetData({ ...petData, [name]: parseInt(value) });
     } else {
       name === "spayedNeutered" || name === "vaccinated" || name === "trained"
         ? setPetData({ ...petData, [name]: checked })

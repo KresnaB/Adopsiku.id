@@ -54,11 +54,29 @@ const DogForm = ({
 }) => {
   // const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   // const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
+  console.log({
+    _id,
+    name,
+    gender,
+    breeds,
+    colors,
+    age,
+    specialNeeds,
+    description,
+    media,
+    source,
+    adoptFee,
+    size,
+    furLength,
+    spayedNeutered,
+    vaccinated,
+    trained,
+  });
+  console.log(gender);
   const isValid =
     name.length > 0 &&
     !error.name &&
-    gender.length > 0 &&
+    gender !== undefined &&
     breeds.length > 0 &&
     colors.length > 0 &&
     age > 0 &&
@@ -67,7 +85,7 @@ const DogForm = ({
     !error.specialNeeds &&
     description.length > 0 &&
     !error.description &&
-    media.length > 0 &&
+    media !== undefined &&
     source.length > 0 &&
     !error.source &&
     adoptFee >= 0 &&
@@ -251,7 +269,15 @@ const DogForm = ({
               aria-label="gender"
               className={classes.radio}
               name="gender"
-              value={_id ? (gender ? "true" : "false") : gender}
+              value={
+                _id
+                  ? typeof gender === "boolean"
+                    ? gender
+                      ? "true"
+                      : "false"
+                    : gender
+                  : gender
+              }
               onChange={handleChange}
             >
               <FormControlLabel
