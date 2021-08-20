@@ -8,6 +8,7 @@ import petOfferRouter from "./routes/pet/petOfferRouter.js";
 import adoptionRouter from "./routes/adoption/adoptionRoutes.js";
 import reportRouter from "./routes/report/reportRoutes.js";
 import conversationRouter from "./routes/conversation/conversationRouter.js";
+import homeRoter from "./routes/home/homeRouter.js";
 import { cancelAdoption } from "./cron/cron.js";
 
 const app = express();
@@ -22,6 +23,7 @@ app.use("/petOffers", petOfferRouter);
 app.use("/adoptions", adoptionRouter);
 app.use("/reports", reportRouter);
 app.use("/conversations", conversationRouter);
+app.use("/homeinfo", homeRoter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to adopsiku API");

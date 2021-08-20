@@ -249,7 +249,7 @@ export default function filterAndSort(match, provMatch, sortBy, input) {
 
     if (time) {
       const sortTime = time.split(":");
-      sortBy["createdAt"] = sortTime[0] === "oldest" ? -1 : 1;
+      sortBy["createdAt"] = sortTime[0] === "oldest" ? 1 : -1;
     }
 
     if (price) {
