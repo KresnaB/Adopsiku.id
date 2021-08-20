@@ -253,28 +253,20 @@ const AdoptionReqPrvRow = ({
               />
             </IconButton>
           </Tooltip>
-          {adopter ? (
-            <Tooltip
-              id="tooltip-top-start"
-              title="Chat"
-              placement="top"
-              classes={{ tooltip: classes.tooltip }}
-            >
-              <IconButton
-                aria-label="Chat"
-                className={classes.tableActionButton}
-              >
-                <Link to={`/start/conversations/${adopter._id}`}>
-                  <Chat
-                    className={
-                      classes.tableActionButtonIcon + " " + classes.info
-                    }
-                  />
-                </Link>
-              </IconButton>
-            </Tooltip>
-          ) : null}
-
+          <Tooltip
+            id="tooltip-top-start"
+            title="Chat"
+            placement="top"
+            classes={{ tooltip: classes.tooltip }}
+          >
+            <IconButton aria-label="Chat" className={classes.tableActionButton}>
+              <Link to={`/start/conversations/${adopter._id}`}>
+                <Chat
+                  className={classes.tableActionButtonIcon + " " + classes.info}
+                />
+              </Link>
+            </IconButton>
+          </Tooltip>
           {status === 2 ? (
             <Tooltip
               id="tooltip-top-start"
