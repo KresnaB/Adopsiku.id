@@ -20,15 +20,18 @@ import petColors from "../../../component/PetOfferForm/colors";
 import Filter from "../../../component/Filter/Filter";
 import BodyFilter from "../../../component/Filter/BodyFilter";
 import { getAllCities } from "../../../store/actions/provinceAction";
+import { useHistory } from "react-router-dom";
 
 const SearchResult = ({ category }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useHistory();
 
   const petOfferList = useSelector((state) => state.petOfferList);
   const { loading, error, petOffers, pageCount, totalPage, totalOffer } =
     petOfferList;
 
+  console.log(history);
   const [page, setPage] = useState(pageCount || 0);
   const [sort, setSort] = useState("newest");
   const [query, setQuery] = useState(
@@ -55,9 +58,8 @@ const SearchResult = ({ category }) => {
   const [colors, setColors] = useState([]);
   const cities = useSelector((state) => state.provinces.regencies);
 
-  console.log(petOffers);
   useEffect(() => {
-    dispatch(listPetOffers(query));
+    dispatch(listPetOffers(query, history));
     switch (category) {
       case "Cat": {
         setBreeds(petBreeds.cat_breeds);

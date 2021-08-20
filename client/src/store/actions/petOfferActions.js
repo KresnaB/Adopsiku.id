@@ -26,30 +26,41 @@ import {
   PET_OFFER_STATUS_FAIL,
 } from "../../constants/petOfferConstants";
 
-export const listPetOffers = (query) => async (dispatch) => {
+export const listPetOffers = (query, history) => async (dispatch) => {
   try {
+    let count = query.split("=")[1];
+    if (count.includes("&")) {
+      count = parseInt(count.split("&")[0]);
+    } else {
+      count = parseInt(count);
+    }
     dispatch({
       type: PET_OFFER_LIST_REQUEST,
-      pageCount: query.split("=")[1],
+      pageCount: count,
     });
 
-    console.log("in");
     const { data } = await api.getPetOffers(query);
 
-    console.log(query);
     dispatch({
       type: PET_OFFER_LIST_SUCCESS,
       payload: data,
-      pageCount: query.split("=")[1],
+      pageCount: count,
     });
+    console.log(history);
   } catch (error) {
+    let count = query.split("=")[1];
+    if (count.includes("&")) {
+      count = parseInt(count.split("&")[0]);
+    } else {
+      count = parseInt(count);
+    }
     dispatch({
       type: PET_OFFER_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
-      pageCount: query.split("=")[1],
+      pageCount: count,
     });
   }
 };
@@ -61,7 +72,6 @@ export const getProviderPets = (id) => async (dispatch) => {
     });
 
     const { data } = await api.getProviderPets(id);
-    console.log(data);
 
     dispatch({
       type: PROVIDER_PET_LIST_SUCCESS,

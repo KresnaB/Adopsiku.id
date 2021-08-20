@@ -207,13 +207,13 @@ export const getPets = async (req, res) => {
       })
       .exec();
 
-    const explain = await Pet.find(match)
-      .explain()
-      .then((res) => res[0]);
-    // Object describing how MongoDB planned to execute the query
-    console.log(explain.queryPlanner);
-    // Object containing stats about how MongoDB executed the query
-    console.log(explain.executionStats);
+    // const explain = await Pet.find(match)
+    //   .explain()
+    //   .then((res) => res[0]);
+    // // Object describing how MongoDB planned to execute the query
+    // console.log(explain.queryPlanner);
+    // // Object containing stats about how MongoDB executed the query
+    // console.log(explain.executionStats);
 
     const petOffers = pets.filter((pet) => pet.provider !== null);
     const totalOffer = await Pet.countDocuments(match);

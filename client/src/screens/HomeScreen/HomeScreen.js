@@ -11,25 +11,29 @@ import cat from "../../images/cat.jpg";
 import rabbit from "../../images/rabbit.jpg";
 import fish from "../../images/fish.jpg";
 import bird from "../../images/bird.jpg";
+import { useHistory } from "react-router-dom";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useHistory();
 
+  console.log(history);
   const petOfferList = useSelector((state) => state.petOfferList);
   const { loading, error, petOffers, pageCount, totalPage } = petOfferList;
 
-  console.log(totalPage);
   const [page, setPage] = useState(pageCount || 0);
   const [query, setQuery] = useState(`?page=${page}`);
 
   useEffect(() => {
-    dispatch(listPetOffers(query));
+    dispatch(listPetOffers(query, history));
   }, [dispatch, query]);
 
   const handleChange = (change) => {
-    setPage(page + change);
-    setQuery(`?page=${page + change}`);
+    if (page + change >= 0) {
+      setPage(page + change);
+      setQuery(`?page=${page + change}`);
+    }
   };
 
   const items = [

@@ -69,7 +69,7 @@ const PetListScreen = () => {
 
   // Page settings on table
   const [page, setPage] = useState(0);
-  const [rowsPerPage] = useState(3);
+  const [rowsPerPage] = useState(6);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -149,7 +149,8 @@ const PetListScreen = () => {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[3, 5, 10, 25, 100]}
+            labelRowsPerPage=""
+            rowsPerPageOptions={[]}
             component="div"
             count={petOffers.length}
             rowsPerPage={rowsPerPage}
