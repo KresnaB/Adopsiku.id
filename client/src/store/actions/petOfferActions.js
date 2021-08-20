@@ -33,8 +33,10 @@ export const listPetOffers = (query) => async (dispatch) => {
       pageCount: query.split("=")[1],
     });
 
+    console.log("in");
     const { data } = await api.getPetOffers(query);
 
+    console.log(query);
     dispatch({
       type: PET_OFFER_LIST_SUCCESS,
       payload: data,
