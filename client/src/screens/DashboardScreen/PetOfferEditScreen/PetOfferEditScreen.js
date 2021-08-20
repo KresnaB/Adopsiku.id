@@ -53,7 +53,7 @@ const fieldsValidation = {
     minLength: 2,
     maxLength: 1000,
   },
-  media: {
+  photos: {
     error: "",
     validate: "array",
   },
@@ -116,6 +116,7 @@ const PetOfferEditScreen = ({ id }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(petData);
     dispatch(updatePetOffer(id, petType, petData));
   };
 
@@ -181,7 +182,7 @@ const PetOfferEditScreen = ({ id }) => {
     if (fileArray.length > 3) {
       fileArray.length = 3;
     }
-    setPetData({ ...petData, media: fileArray });
+    setPetData({ ...petData, photos: fileArray });
   };
 
   if (petType) {

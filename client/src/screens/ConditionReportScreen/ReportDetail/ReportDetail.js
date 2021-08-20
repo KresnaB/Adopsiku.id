@@ -140,9 +140,6 @@ const ReportDetail = ({ id }) => {
                           Sudah Ditandai Dibaca
                         </Button>
                       )}
-                      <Button className={classes.button2}>
-                        Chat Pengadopsi
-                      </Button>
                     </>
                   </div>
                 </CardContent>

@@ -13,7 +13,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import FileBase from "react-file-base64";
+import FileBase from "../../FileBase64/FileBase64";
 import petBreeds from "../breeds";
 import petColors from "../colors";
 import useStyles from "../styles";
@@ -242,7 +242,6 @@ const FuryForm = ({
             <FileBase
               type="file"
               multiple={true}
-              imagePreview
               onDone={(e) => {
                 const fileName = [];
                 console.log(e);
