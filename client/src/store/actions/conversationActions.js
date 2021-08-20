@@ -28,7 +28,7 @@ export const createConversation =
         type: CONVERSATION_CREATE_SUCCESS,
         payload: data,
       });
-      history.push("/conversations");
+      history.replace("/conversations");
     } catch (error) {
       dispatch({
         type: CONVERSATION_CREATE_FAIL,
