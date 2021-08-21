@@ -1,12 +1,15 @@
 import ConditionReport from "../../model/report/ConditionReportModel.js";
 import AdoptionRequest from "../../model/adoption/AdoptionRequestModel.js";
 import Pet from "../../model/pet/petModel.js";
+import nodemailer from "nodemailer";
 import { inspect } from "util";
 import { match } from "assert";
 
 export const createReport = async (req, res) => {
   try {
-    const pet = await Pet.findById(req.params.id);
+    const pet = await Pet.findById(req.params.id)
+      .select("name provider")
+      .populate("provider", "_id name email");
     //note: duration and status check needed
     if (!pet) {
       res.status(400).send("Hewan Tidak Ada");
@@ -25,6 +28,33 @@ export const createReport = async (req, res) => {
     });
     const report = pet.conditionReports.concat([createdReport._id]);
     await Pet.findByIdAndUpdate(req.params.id, { conditionReports: report });
+
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.EMAIL_CRED,
+        pass: process.env.PASSWORD_CRED,
+      },
+    });
+    const mailOptions = {
+      from: process.env.EMAIL_CRED,
+      to: pet.provider.email,
+      subject: "Pengajuan Adopsi Baru",
+      text:
+        "Halo " +
+        pet.provider.name +
+        ",\n\n" +
+        "Kondisi terbaru dari " +
+        pet.name +
+        " ,baru saja dilaporkan!\nAyo buka https://www.adopsiku.site/ untuk melihat detailnya" +
+        ".\n",
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error.message);
+      }
+      console.log("Message sent: %s", info.messageId);
+    });
 
     res.status(200).send({ createdReport });
   } catch (err) {

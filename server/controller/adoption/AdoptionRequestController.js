@@ -1,4 +1,7 @@
 import AdoptionRequest from "../../model/adoption/AdoptionRequestModel.js";
+import Pet from "../../model/pet/petModel.js";
+import User from "../../model/user/userModel.js";
+import nodemailer from "nodemailer";
 
 // @route   POST /adoptions/applyadoption/:adopter/:offer
 // @desc    Create an adoption request
@@ -12,6 +15,38 @@ export const applyAdoption = async (req, res) => {
       commitment: req.body.commitment,
       experience: req.body.experience,
       createdAt: new Date().toISOString(),
+    });
+    const provierInfo = await Pet.findById(req.body.pet)
+      .populate("provider", "_id name email")
+      .select("name provider");
+
+    const adopterInfo = await User.findById(req.body.adopter).select("name");
+
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.EMAIL_CRED,
+        pass: process.env.PASSWORD_CRED,
+      },
+    });
+    const mailOptions = {
+      from: process.env.EMAIL_CRED,
+      to: provierInfo.provider.email,
+      subject: "Pengajuan Adopsi Baru",
+      text:
+        "Hallo " +
+        provierInfo.provider.name +
+        ",\n\n" +
+        adopterInfo.name +
+        " mengajukan permintaan adopsi pada penawaranmu!\nAyo buka https://www.adopsiku.site/ untuk melihat detailnya" +
+        ".\n" +
+        "catatan: review pengajuan sebelum batal otomatis dalam 2 hari",
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error.message);
+      }
+      console.log("Message sent: %s", info.messageId);
     });
 
     res.status(200).send({ newAdoptionRequest });
@@ -33,7 +68,8 @@ export const getAdoptionsByAdopter = async (req, res) => {
         populate: {
           path: "provider",
         },
-      }).populate("adopter");
+      })
+      .populate("adopter");
 
     res.status(200).send({ adoptionRequests });
   } catch (err) {
@@ -52,10 +88,12 @@ export const getAdoptionsByProvider = async (req, res) => {
         populate: {
           path: "provider",
           match: { _id: req.params.id },
-        }
+        },
       })
       .populate("adopter");
-    const adoptionRequests = adoptionReq.filter((adoption) => adoption.pet.provider !== null);
+    const adoptionRequests = adoptionReq.filter(
+      (adoption) => adoption.pet.provider !== null
+    );
 
     res.status(200).send({ adoptionRequests });
   } catch (err) {

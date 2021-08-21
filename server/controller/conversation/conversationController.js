@@ -1,6 +1,7 @@
 import Conversation from "../../model/conversation/conversationModel.js";
-import Message from "../../model/conversation/messageSchema.js";
+import User from "../../model/user/userModel.js";
 import ArchivedMessage from "../../model/conversation/archivedMessageModel.js";
+import nodemailer from "nodemailer";
 
 // @route   POST /adoptions/applyadoption/:adopter/:offer
 // @desc    Create an adoption request
@@ -10,6 +11,14 @@ export const createConversation = async (req, res) => {
     let checkConvExist = await Conversation.find({
       participants: [req.body.senderId, req.body.receiverId],
     });
+    const sender = await User.findById(req.body.receiverId).select("name");
+    const receiver = await User.findById(req.body.receiverId).select(
+      "name email"
+    );
+    if (!receiver) {
+      res.status(200).send({ message: "Pengguna tidak ditemukan" });
+      return;
+    }
     if (checkConvExist.length !== 0) {
       res.status(200).send({ message: "Percakapan sudah ada" });
       return;
@@ -23,6 +32,32 @@ export const createConversation = async (req, res) => {
     }
     const newConversation = await Conversation.create({
       participants: [req.body.senderId, req.body.receiverId],
+    });
+
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.EMAIL_CRED,
+        pass: process.env.PASSWORD_CRED,
+      },
+    });
+    const mailOptions = {
+      from: process.env.EMAIL_CRED,
+      to: receiver.email,
+      subject: "Percakapan Baru",
+      text:
+        "Hallo " +
+        receiver.name +
+        ",\n\n" +
+        sender.name +
+        " memulai percakapan dengamu!\nAyo buka https://www.adopsiku.site/ untuk melihat detailnya" +
+        ".\n",
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error.message);
+      }
+      console.log("Message sent: %s", info.messageId);
     });
     res.status(200).send({ newConversation });
   } catch (err) {
