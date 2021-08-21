@@ -39,7 +39,7 @@ export const createReport = async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL_CRED,
       to: pet.provider.email,
-      subject: "Pengajuan Adopsi Baru",
+      subject: "Laporan Kondisi Hewan Baru",
       text:
         "Halo " +
         pet.provider.name +

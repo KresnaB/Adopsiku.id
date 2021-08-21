@@ -44,7 +44,7 @@ export const createConversation = async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL_CRED,
       to: receiver.email,
-      subject: "Percakapan Baru",
+      subject: "Percakapan Baru di Adopsiku",
       text:
         "Hallo " +
         receiver.name +
