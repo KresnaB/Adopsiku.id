@@ -24,6 +24,8 @@ const PetOfferScreen = ({ id }) => {
   // Variable to save Pet Offer Detail data from reducer
   const petOfferDetails = useSelector((state) => state.petOfferDetails);
   const { loading, error, petOffer, adopter } = petOfferDetails;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   // Variable to save UserLogin info
   const user = useSelector((state) => state.userLogin.userInfo);
@@ -193,20 +195,41 @@ const PetOfferScreen = ({ id }) => {
                         >
                           Tertarik dengan {petOffer.name}?
                         </Typography>
-                        <Button
-                          className={classes.button2}
-                          component={Link}
-                          to={`/adoption/apply/${petOffer._id}`}
-                        >
-                          Ajukan Adopsi
-                        </Button>
-                        <Button
-                          className={classes.button2}
-                          component={Link}
-                          to={`/start/conversations/${petOffer.provider._id}`}
-                        >
-                          Chat {petOffer.provider.name}
-                        </Button>
+                        {userInfo ? (
+                          <>
+                            <Button
+                              className={classes.button2}
+                              component={Link}
+                              to={`/adoption/apply/${petOffer._id}`}
+                            >
+                              Ajukan Adopsi
+                            </Button>
+                            <Button
+                              className={classes.button2}
+                              component={Link}
+                              to={`/start/conversations/${petOffer.provider._id}`}
+                            >
+                              Chat {petOffer.provider.name}
+                            </Button>
+                          </>
+                        ) : (
+                          <>
+                            <Button
+                              className={classes.button2}
+                              component={Link}
+                              to={"/login"}
+                            >
+                              Ajukan Adopsi
+                            </Button>
+                            <Button
+                              className={classes.button2}
+                              component={Link}
+                              to={"/login"}
+                            >
+                              Chat {petOffer.provider.name}
+                            </Button>
+                          </>
+                        )}
                       </>
                     ) : null}
                     <Typography variant="h6" className={classes.subTitle3}>
