@@ -16,7 +16,7 @@ async function findExpiredAdoption() {
   AdoptionRequest.find({ status: 0 }).then((adoptions) => {
     adoptions.forEach(async function (adoption) {
       const duration =
-        moment(adoption.createdAt).add(2, "d") - moment(new Date());
+        moment(adoption.createdAt).add(5, "minutes") - moment(new Date());
       console.log(duration);
       if (duration <= 0) {
         await AdoptionRequest.findByIdAndUpdate(adoption._id, { status: 4 });
