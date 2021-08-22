@@ -226,14 +226,14 @@ export default function PrimarySearchAppBar() {
             </Button>
             {userInfo ? (
               <>
-                <IconButton
+                {/* <IconButton
                   aria-label="show 17 new notifications"
                   color="inherit"
                 >
                   <Badge badgeContent={1} color="primary">
                     <NotificationsIcon />
                   </Badge>
-                </IconButton>
+                </IconButton> */}
                 <IconButton
                   edge="end"
                   aria-label="account of current user"
