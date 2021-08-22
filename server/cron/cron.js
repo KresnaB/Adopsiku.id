@@ -33,49 +33,49 @@ async function reportReminder() {
         if (adoptedAt !== undefined) {
           let duration = moment(new Date()).diff(moment(pet.adoptedAt), "days");
           let repDuration = pet.reportDuration;
-          if (duration !== 0 && repDuration !== 0) {
-            //if (duration % (repDuration * 7) === 0) {
-            let receiver = await AdoptionRequest.find({
-              pet: pet._id,
-              status: 2,
-            })
-              .select("adopter")
-              .populate("adopter", "_id name email");
+          //if (duration !== 0 && repDuration !== 0) {
+          //if (duration % (repDuration * 7) === 0) {
+          let receiver = await AdoptionRequest.find({
+            pet: pet._id,
+            status: 2,
+          })
+            .select("adopter")
+            .populate("adopter", "_id name email");
+          console.log(receiver);
+          console.log("lul");
+          receiver = receiver[0];
+          console.log(receiver);
+          if (receiver !== undefined) {
+            console.log("in");
             console.log(receiver);
-            console.log("lul");
-            receiver = receiver[0];
-            console.log(receiver);
-            if (receiver !== undefined) {
-              console.log("in");
-              console.log(receiver);
-              const transporter = nodemailer.createTransport({
-                service: "Gmail",
-                auth: {
-                  user: process.env.EMAIL_CRED,
-                  pass: process.env.PASSWORD_CRED,
-                },
-              });
-              const mailOptions = {
-                from: process.env.EMAIL_CRED,
-                to: receiver.adopter.email,
-                subject: "Pengingat Pelaporan Kondisi Hewan Adopsi",
-                text:
-                  "Hallo " +
-                  receiver.adopter.name +
-                  ",\n\n" +
-                  "Ayo laporkan kondisi hewan terbaru dari " +
-                  pet.name +
-                  "\nBuka https://www.adopsiku.site/ untuk melihat detailnya" +
-                  ".\n",
-              };
-              transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                  return console.log(error.message);
-                }
-                console.log("Message sent: %s", info.messageId);
-              });
-            }
+            const transporter = nodemailer.createTransport({
+              service: "Gmail",
+              auth: {
+                user: process.env.EMAIL_CRED,
+                pass: process.env.PASSWORD_CRED,
+              },
+            });
+            const mailOptions = {
+              from: process.env.EMAIL_CRED,
+              to: receiver.adopter.email,
+              subject: "Pengingat Pelaporan Kondisi Hewan Adopsi",
+              text:
+                "Hallo " +
+                receiver.adopter.name +
+                ",\n\n" +
+                "Ayo laporkan kondisi hewan terbaru dari " +
+                pet.name +
+                "\nBuka https://www.adopsiku.site/ untuk melihat detailnya" +
+                ".\n",
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                return console.log(error.message);
+              }
+              console.log("Message sent: %s", info.messageId);
+            });
           }
+          // }
           // }
         }
       });
