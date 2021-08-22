@@ -8,14 +8,16 @@ import { match } from "assert";
 export const createReport = async (req, res) => {
   try {
     const pet = await Pet.findById(req.params.id)
-      .select("name provider")
+      .select("name status provider conditionReports")
       .populate("provider", "_id name email");
     //note: duration and status check needed
     if (!pet) {
       res.status(400).send("Hewan Tidak Ada");
+      return;
     } else {
       if (pet.status !== 2) {
         res.status(400).send("Tahap Adopsi Belum Selesai");
+        return;
       }
     }
     const createdReport = await ConditionReport.create({
@@ -58,7 +60,6 @@ export const createReport = async (req, res) => {
 
     res.status(200).send({ createdReport });
   } catch (err) {
-    console.log(err);
     res.status(400).send({ error: err });
   }
 };
