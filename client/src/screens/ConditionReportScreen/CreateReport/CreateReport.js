@@ -20,7 +20,7 @@ import { useHistory } from "react-router";
 import validation from "./validation";
 
 const initialState = {
-  type: "",
+  type: null,
   photos: [""],
   title: "",
   description: "",
@@ -63,7 +63,9 @@ const CreateReport = () => {
     <Grid container className={classes.center}>
       <Grid item xs={12} md={8}>
         <Paper className={classes.container} elevation={3}>
-          <Typography variant="h6" fontWeight="bold" textAlign="center">Buat laporan kondisi hewan</Typography>
+          <Typography variant="h6" fontWeight="bold" textAlign="center">
+            Buat laporan kondisi hewan
+          </Typography>
           {conditionReport === undefined ? (
             <Alert severity="warning">Belum Ada Laporan</Alert>
           ) : (

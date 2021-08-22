@@ -41,7 +41,7 @@ export default function ClippedDrawer() {
             {user.name}
           </Typography>
           <List>
-            {path === "/dashboard" ? (
+            {/* {path === "/dashboard" ? (
               <Button className={classes.button} variant="contained" disabled>
                 {" "}
                 <Home className={classes.icon} />{" "}
@@ -57,6 +57,23 @@ export default function ClippedDrawer() {
               >
                 <Home className={classes.icon} />
                 <span className={classes.itemLabel}>Home</span>
+              </Button>
+            )} */}
+            {path === "/dashboard/pet" ? (
+              <Button className={classes.button} variant="contained" disabled>
+                <Pets className={classes.icon} />{" "}
+                <span className={classes.itemLabel}>Hewan Adopsi</span>
+              </Button>
+            ) : (
+              <Button
+                className={classes.button}
+                variant="contained"
+                color="primary"
+                component={Link}
+                to="/dashboard/pet"
+              >
+                <Pets className={classes.icon} />{" "}
+                <span className={classes.itemLabel}>Hewan Adopsi</span>
               </Button>
             )}
             {path === "/dashboard/myprofile" ? (
@@ -91,23 +108,6 @@ export default function ClippedDrawer() {
               >
                 <ChatBubbleOutline className={classes.icon} />{" "}
                 <span className={classes.itemLabel}>Chat</span>
-              </Button>
-            )}
-            {path === "/dashboard/pet" ? (
-              <Button className={classes.button} variant="contained" disabled>
-                <Pets className={classes.icon} />{" "}
-                <span className={classes.itemLabel}>Hewan Adopsi</span>
-              </Button>
-            ) : (
-              <Button
-                className={classes.button}
-                variant="contained"
-                color="primary"
-                component={Link}
-                to="/dashboard/pet"
-              >
-                <Pets className={classes.icon} />{" "}
-                <span className={classes.itemLabel}>Hewan Adopsi</span>
               </Button>
             )}
             {path === "/dashboard/adoptions" ? (

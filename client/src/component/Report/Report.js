@@ -31,7 +31,11 @@ const Report = ({ report }) => {
         <div variant="body2">
           <Chip
             size="small"
-            label={report.reportDuration + " Minggu"}
+            label={
+              report.reportDuration === 0
+                ? "Durasi belum di set"
+                : "Laporkan setiap " + report.reportDuration + " Minggu"
+            }
             style={{ backgroundColor: "#66bb6a" }}
             className={classes.statusLabel}
           />

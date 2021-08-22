@@ -49,7 +49,7 @@ export default function PrimarySearchAppBar() {
     if (userInfo.role === "Adopter") {
       route = "/myprofile/";
     } else {
-      route = "/dashboard/";
+      route = "/dashboard/pet";
     }
   }
 

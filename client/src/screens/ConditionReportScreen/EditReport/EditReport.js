@@ -20,7 +20,7 @@ import { useHistory } from "react-router";
 import validation from "../CreateReport/validation";
 
 const initialState = {
-  type: "",
+  type: null,
   photos: [""],
   title: "",
   description: "",
@@ -62,7 +62,9 @@ const EditReport = ({ report }) => {
     <Grid container className={classes.center}>
       <Grid item xs={12} md={8}>
         <Paper className={classes.container} elevation={3}>
-          <Typography variant="h6" fontWeight="bold" textAlign="center">Edit laporan kondisi hewan</Typography>
+          <Typography variant="h6" fontWeight="bold" textAlign="center">
+            Edit laporan kondisi hewan
+          </Typography>
           {report === undefined ? (
             <Alert severity="error">Data Hewan Adopsi Tidak Ada</Alert>
           ) : (

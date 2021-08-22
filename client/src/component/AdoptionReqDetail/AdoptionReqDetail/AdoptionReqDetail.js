@@ -3,7 +3,7 @@ import { Typography, Grid, CardMedia } from "@material-ui/core";
 import moment from "moment";
 import useStyles from "./styles";
 import ReqDetail from "../ReqDetail/ReqDetail";
-import ImageDialog from "../../Modal/ImageDialog"
+import ImageDialog from "../../Modal/ImageDialog";
 
 const AdoptionReqDetail = ({
   id,
@@ -43,12 +43,26 @@ const AdoptionReqDetail = ({
           }
         />
         <ReqDetail label="Nomor KTP" value={adopter.identityNumber} />
-        <ReqDetail label="Jenis Kelamin" value={adopter.gender === "Female" ? "Perempuan": adopter.gender === "Male"? "Laki-laki":"Lainnya"} />
-        <ReqDetail label="Pekerjaan Tetap" value={adopter.fixedJob ? "Ya" : "Tidak"} />
+        <ReqDetail
+          label="Jenis Kelamin"
+          value={
+            adopter.gender === "Female"
+              ? "Perempuan"
+              : adopter.gender === "Male"
+              ? "Laki-laki"
+              : "Lainnya"
+          }
+        />
+        <ReqDetail
+          label="Pekerjaan Tetap"
+          value={adopter.fixedJob ? "Ya" : "Tidak"}
+        />
         <ReqDetail
           label="Alamat"
           value={
-            (adopter.address.additional ? adopter.address.additional + " " : "") +
+            (adopter.address.additional
+              ? adopter.address.additional + " "
+              : "") +
             (adopter.address.village ? adopter.address.village + " " : "") +
             (adopter.address.district ? adopter.address.district + " " : "") +
             (adopter.address.city ? adopter.address.city + " " : "") +
@@ -86,9 +100,22 @@ const AdoptionReqDetail = ({
         <ReqDetail label="Tipe Rumah" value={houseCondition.houseType} />
         <ReqDetail
           label="Ukuran Rumah"
-          value={(houseCondition.houseSize = 1 ? "< 200 m2" : null)}
+          value={
+            houseCondition.houseSize === 1
+              ? "< 200 m2"
+              : houseCondition.houseSize === 2
+              ? "200-400m2"
+              : houseCondition.houseSize === 3
+              ? "400-1000m2"
+              : houseCondition.houseSize === 4
+              ? ">1000m2"
+              : ">1000m2"
+          }
         />
-        <ReqDetail label="Ruang Terbuka" value={houseCondition.outdoors.join(", ")} />
+        <ReqDetail
+          label="Ruang Terbuka"
+          value={houseCondition.outdoors.join(", ")}
+        />
         <Typography className={classes.title}>Foto Rumah</Typography>
         <Grid item md={12} xs={12} sm={12} className={classes.grid}>
           {houseCondition.housePhotos.map((med) => (
@@ -102,11 +129,11 @@ const AdoptionReqDetail = ({
               }
             />
           ))}
-            <ImageDialog
-              handleOpen={open}
-              handleClose={closePhotos}
-              body={houseCondition.housePhotos}
-            />
+          <ImageDialog
+            handleOpen={open}
+            handleClose={closePhotos}
+            body={houseCondition.housePhotos}
+          />
         </Grid>
       </Grid>
       <Grid item xs={12} sm={12} md={6} lg={6}>

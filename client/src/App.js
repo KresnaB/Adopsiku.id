@@ -190,7 +190,7 @@ const App = () => {
             </main>
           )}
         />
-        <Route path="/dashboard" exact>
+        {/* <Route path="/dashboard" exact>
           {isLogin ? (
             isLogin.role !== "Adopter" ? (
               <div className={classes.flex}>
@@ -206,7 +206,7 @@ const App = () => {
           ) : (
             <Redirect to={{ pathname: "/login" }} />
           )}
-        </Route>
+        </Route> */}
         <Route path="/dashboard/pet" exact>
           {isLogin ? (
             isLogin.role !== "Adopter" ? (
