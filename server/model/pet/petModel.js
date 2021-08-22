@@ -24,6 +24,7 @@ const Pet = mongoose.model(
       reportDuration: { type: Number, default: 0, required: true },
       status: { type: Number, default: 0, required: true },
       createdAt: { type: Date },
+      adoptedAt: { type: Date },
       conditionReports: [{ type: ObjectId, ref: "ConditionReport" }],
     },
     petOptions

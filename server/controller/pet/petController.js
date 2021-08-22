@@ -9,6 +9,7 @@ import Turtles from "../../model/pet/turtleOfferModel.js";
 import Pet from "../../model/pet/petModel.js";
 import AdoptionRequest from "../../model/adoption/AdoptionRequestModel.js";
 import User from "../../model/user/userModel.js";
+import moment from "moment";
 
 // @route   POST /petOffers/:type
 // @desc    Create a pet offer
@@ -403,6 +404,14 @@ export const updatePetStatus = async (req, res) => {
       { _id: req.params.id },
       { status: req.body.status }
     );
+    if (req.body.status === 2) {
+      await AdoptionRequest.updateMany({ pet: req.params.id }, { status: 3 });
+      await Pet.updateOne(
+        { _id: req.params.id },
+        { adoptedAt: new Date().toISOString() }
+      );
+      await AdoptionRequest.findByIdAndUpdate(req.body.offer, { status: 2 });
+    }
     res.send("update success");
   } catch (err) {
     res.status(400).send({ error: err });

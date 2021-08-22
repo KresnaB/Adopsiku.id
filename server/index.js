@@ -9,7 +9,7 @@ import adoptionRouter from "./routes/adoption/adoptionRoutes.js";
 import reportRouter from "./routes/report/reportRoutes.js";
 import conversationRouter from "./routes/conversation/conversationRouter.js";
 import homeRoter from "./routes/home/homeRouter.js";
-import { cancelAdoption } from "./cron/cron.js";
+import { cancelAdoption, reportReminderCron } from "./cron/cron.js";
 
 const app = express();
 dotenv.config();
@@ -31,6 +31,7 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 cancelAdoption.start();
+reportReminderCron.start();
 
 mongoose
   .connect(process.env.CONNECTION_URL, {

@@ -16,7 +16,7 @@ export const applyAdoption = async (req, res) => {
       experience: req.body.experience,
       createdAt: new Date().toISOString(),
     });
-    const provierInfo = await Pet.findById(req.body.pet)
+    const providerInfo = await Pet.findById(req.body.pet)
       .populate("provider", "_id name email")
       .select("name provider");
 
@@ -31,11 +31,11 @@ export const applyAdoption = async (req, res) => {
     });
     const mailOptions = {
       from: process.env.EMAIL_CRED,
-      to: provierInfo.provider.email,
+      to: providerInfo.provider.email,
       subject: "Pengajuan Adopsi Baru",
       text:
         "Hallo " +
-        provierInfo.provider.name +
+        providerInfo.provider.name +
         ",\n\n" +
         adopterInfo.name +
         " mengajukan permintaan adopsi pada penawaranmu!\nAyo buka https://www.adopsiku.site/ untuk melihat detailnya" +
@@ -161,7 +161,34 @@ export const updateAdoptionStatus = async (req, res) => {
     await AdoptionRequest.findByIdAndUpdate(req.params.id, {
       status: req.body.status,
     });
-    res.status(200).send({ message: "Update status adopsi sukses dilakuakan" });
+    const adopter = await AdoptionRequest.findById(req.params.id)
+      .select("adopter")
+      .populate("adopter", "name email");
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.EMAIL_CRED,
+        pass: process.env.PASSWORD_CRED,
+      },
+    });
+    const mailOptions = {
+      from: process.env.EMAIL_CRED,
+      to: adopter.adopter.email,
+      subject: "Penerimaan Pengajuan Adopsi",
+      text:
+        "Hallo " +
+        adopter.adopter.name +
+        ",\n\n" +
+        "Pengajuan permintaan adopsimu telah diterima, segera hubungi penyedia untuk informasi selanjutnya!\nAyo buka https://www.adopsiku.site/ untuk melihat detailnya" +
+        ".\n",
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error.message);
+      }
+      console.log("Message sent: %s", info.messageId);
+    });
+    res.status(200).send({ message: "Update status adopsi sukses dilakukan" });
   } catch (err) {
     res.status(400).send({ error: err });
   }

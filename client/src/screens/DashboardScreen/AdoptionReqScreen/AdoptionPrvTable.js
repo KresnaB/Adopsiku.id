@@ -13,7 +13,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
 import useStyles from "./styles";
-import { updateAdoptionStatus, viewAdoptionsByProvider } from "../../../store/actions/adoptionRequestActions";
+import {
+  updateAdoptionStatus,
+  viewAdoptionsByProvider,
+} from "../../../store/actions/adoptionRequestActions";
 import { updateStatus } from "../../../store/actions/petOfferActions";
 import AdoptionReqPrvRow from "../../../component/AdoptionReqPrvRow/AdoptionReqPrvRow";
 
@@ -26,7 +29,7 @@ const headers = [
   { id: "action", label: "Detail", minWidth: 50, hide: false },
 ];
 
-const AdoptionPrvTable = ({status}) => {
+const AdoptionPrvTable = ({ status }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [changeStatus, setChangeStatus] = useState(null);
@@ -43,7 +46,10 @@ const AdoptionPrvTable = ({status}) => {
       const data = { status: changeStatus.status };
       dispatch(updateAdoptionStatus(changeStatus.id, data));
       dispatch(
-        updateStatus(changeStatus.offerId, { status: changeStatus.offerStatus })
+        updateStatus(changeStatus.offerId, {
+          status: changeStatus.offerStatus,
+          offer: changeStatus.id,
+        })
       );
     }
   }, [dispatch, changeStatus]);
@@ -61,7 +67,7 @@ const AdoptionPrvTable = ({status}) => {
     setPage(newPage);
   };
 
-  console.log(status)
+  console.log(status);
 
   return (
     <>
@@ -92,35 +98,46 @@ const AdoptionPrvTable = ({status}) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-              {status === ""?
-                adoptionReq
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((adoption) => (
-                    <AdoptionReqPrvRow
-                      key={adoption._id}
-                      adoptionReq={adoption}
-                      setChangeStatus={setChangeStatus}
-                      compLoading={componentLoading}
-                    />
-                  )):
-                  adoptionReq
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .filter((adoption) => adoption.status === status-1)
-                  .map((adoption) => (
-                    <AdoptionReqPrvRow
-                      key={adoption._id}
-                      adoptionReq={adoption}
-                      setChangeStatus={setChangeStatus}
-                      compLoading={componentLoading}
-                    />
-                  ))}
+                {status === ""
+                  ? adoptionReq
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((adoption) => (
+                        <AdoptionReqPrvRow
+                          key={adoption._id}
+                          adoptionReq={adoption}
+                          setChangeStatus={setChangeStatus}
+                          compLoading={componentLoading}
+                        />
+                      ))
+                  : adoptionReq
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .filter((adoption) => adoption.status === status - 1)
+                      .map((adoption) => (
+                        <AdoptionReqPrvRow
+                          key={adoption._id}
+                          adoptionReq={adoption}
+                          setChangeStatus={setChangeStatus}
+                          compLoading={componentLoading}
+                        />
+                      ))}
               </TableBody>
             </Table>
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[3, 5, 10, 25, 100]}
             component="div"
-            count={!status?adoptionReq.length:[adoptionReq.find(adoption => adoption.status = status)].length}
+            count={
+              !status
+                ? adoptionReq.length
+                : [adoptionReq.find((adoption) => (adoption.status = status))]
+                    .length
+            }
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
