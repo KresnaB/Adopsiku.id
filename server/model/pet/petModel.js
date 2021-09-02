@@ -22,9 +22,11 @@ const Pet = mongoose.model(
       description: { type: String, required: true },
       adoptFee: { type: Number, required: true },
       reportDuration: { type: Number, default: 0, required: true },
+      satuan: { type: String },
       status: { type: Number, default: 0, required: true },
       createdAt: { type: Date },
       adoptedAt: { type: Date },
+      nextNotif: { type: Date },
       conditionReports: [{ type: ObjectId, ref: "ConditionReport" }],
     },
     petOptions

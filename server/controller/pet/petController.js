@@ -359,10 +359,16 @@ export const updatePet = async (req, res) => {
 
 export const setReportDuration = async (req, res) => {
   try {
+    const pet = await Pet.findByIdAndUpdate(
+      { _id: req.params.id },
+      { reportDuration: req.body.duration },
+      { satuan: req.body.satuan },
+    );
     const petOffer = await Pet.findByIdAndUpdate(
       { _id: req.params.id },
-      { reportDuration: req.body.duration }
+      { nextNotif: moment(pet.adoptedAt).add(req.body.duration, req.body.satuan)}
     );
+    
     res.send({ petOffer });
   } catch (err) {
     res.status(400).send({ error: err });
