@@ -7,6 +7,11 @@ import {
   Chip,
   TextField,
   InputAdornment,
+  Grid,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel
 } from "@material-ui/core";
 import {
   InfoSharp,
@@ -47,6 +52,10 @@ const AdoptionReqPrvRow = ({
   const [openDetailModal, setOpenDetailModal] = useState(false);
   const [openDurationModal, setOpenDurationModal] = useState(false);
   const [duration, setDuration] = useState(0);
+  const [durationData, setDurationData] = useState({
+    duration: 0,
+    satuan: "weeks"
+  })
 
   // Handle change status pet offer
   const handleOpenStatusModal = () => {
@@ -114,7 +123,7 @@ const AdoptionReqPrvRow = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(setReportDuration(pet._id, duration));
+    dispatch(setReportDuration(pet._id, durationData));
     handleCloseDurationModal();
   };
 
@@ -315,16 +324,29 @@ const AdoptionReqPrvRow = ({
                 <TextField
                   label="Durasi pelaporan"
                   type="number"
-                  onChange={(e) => setDuration(e.target.value)}
-                  value={duration}
-                  inputProps={{ min: "0", max: "12", step: "1" }}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">Minggu</InputAdornment>
-                    ),
-                  }}
+                  onChange={(e) => setDurationData({ ...durationData, duration: e.target.value })}
+                  value={durationData.duration}
                   size="small"
                 />
+                  <FormControl
+                    className={classes.field}
+                    variant="outlined"
+                    size="small"
+                    required
+                    width="300px"
+                  >
+                    <InputLabel>Satuan</InputLabel>
+                    <Select
+                      label="Kicauan"
+                      name="chirping"
+                      id="chirping"
+                      onChange={(e) => setDurationData({ ...durationData, satuan: e.target.value })}
+                      value={durationData.satuan}
+                    >
+                      <MenuItem value="weeks">Minggu</MenuItem>
+                      <MenuItem value="months">Bulan</MenuItem>
+                    </Select>
+                  </FormControl>
               </form>
             }
           />

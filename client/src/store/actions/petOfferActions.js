@@ -133,16 +133,16 @@ export const updateStatus = (id, status) => async (dispatch) => {
   }
 };
 
-export const setReportDuration = (id, duration) => async (dispatch) => {
+export const setReportDuration = (id, durationData) => async (dispatch) => {
   try {
     dispatch({
       type: PET_OFFER_UPDATE_REQUEST,
     });
-    await api.setReportDuration(id, { duration: duration });
+    await api.setReportDuration(id, durationData);
 
     dispatch({
       type: PET_OFFER_UPDATE_SUCCESS,
-      payload: { _id: id, duration: duration },
+      payload: { _id: id, duration: durationData.duration },
     });
   } catch (error) {
     dispatch({

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://adopsiku.herokuapp.com" });
+// const API = axios.create({ baseURL: "https://adopsiku.herokuapp.com" });
 
-//const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create({ baseURL: "http://localhost:5000" });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
@@ -86,8 +86,8 @@ export const getPetOffersByProviderID = (provID) =>
   API.get(`/petOffers/prov/${provID}`);
 export const updateStatusPetOffer = (id, status) =>
   API.put(`/petOffers/status/${id}`, status);
-export const setReportDuration = (id, duration) =>
-  API.put(`/petOffers/reportduration/${id}`, duration);
+export const setReportDuration = (id, durationData) =>
+  API.put(`/petOffers/reportduration/${id}`, durationData);
 export const getProviderDetail = (id) => API.get(`/users/provider/${id}`);
 
 // Adoption Request
